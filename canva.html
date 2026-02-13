@@ -6,143 +6,432 @@
   <title>Canva • Endzyless Store</title>
   <style>
     :root{
-      --bg1:#0b0c10; --card:#12141b; --text:#e8eaf0; --muted:#a9afc3; --line:#212534;
-      --grad1:#1f6feb; --grad2:#7c3aed; --soft: rgba(255,255,255,.04);
+      --bg:#0b0c10;--card:#12141b;--text:#e8eaf0;--muted:#a9afc3;--line:#212534;
+      --g1:#2f7dff;--g2:#7c3aed;
+      --panel:#0f121a;
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#0b0c10 0%, #0a1020 60%, #0b0c10 100%);color:var(--text)}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#0b0c10,#0a1020);color:var(--text)}
     a{text-decoration:none;color:inherit}
+    button{font-family:inherit}
+
+    /* TOP BAR */
     .top{
       position:sticky;top:0;z-index:10;
       background:rgba(11,12,16,.78);backdrop-filter:blur(10px);
       border-bottom:1px solid var(--line);
-      padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px
+      padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px
     }
-    .brand{display:flex;gap:12px;align-items:center;min-width:0}
-    .logo{
-      width:44px;height:44px;border-radius:16px;
-      background:linear-gradient(135deg,var(--grad1),var(--grad2));
-      display:grid;place-items:center;font-weight:900;color:#071018;flex:0 0 auto;
-      overflow:hidden;
+    .left{display:flex;align-items:center;gap:10px;min-width:0}
+    .back{
+      width:38px;height:38px;border-radius:12px;border:1px solid var(--line);
+      display:grid;place-items:center;background:rgba(255,255,255,.02)
     }
-    .logo img{width:100%;height:100%;object-fit:cover}
-    .brand .txt{min-width:0}
-    .brand h1{margin:0;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .brand p{margin:2px 0 0;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .titleWrap{min-width:0}
+    .titleWrap h1{margin:0;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .titleWrap p{margin:2px 0 0;color:var(--muted);font-size:12px}
     .chip{
       padding:10px 12px;border:1px solid var(--line);border-radius:999px;
-      font-size:12px;background:rgba(255,255,255,.02)
+      font-size:12px;background:rgba(255,255,255,.02);white-space:nowrap
     }
-    .wrap{max-width:980px;margin:0 auto;padding:18px 16px 60px}
-    .hero{padding:10px 0 14px}
-    .hero h2{margin:0 0 6px;font-size:22px}
-    .hero p{margin:0;color:var(--muted);line-height:1.45}
-    .grid{display:grid;gap:12px}
-    .card{
+
+    /* FILTER BAR */
+    .wrap{max-width:920px;margin:0 auto;padding:14px 14px 80px}
+    .filter{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius:16px;padding:12px;display:flex;gap:10px;align-items:center
+    }
+    .sel, .inp{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.02);
+      color:var(--text);
+      border-radius:12px;
+      padding:10px 10px;
+      outline:none;
+      font-size:13px;
+    }
+    .sel{min-width:130px}
+    .inp{flex:1}
+    .iconBtn{
+      width:42px;height:42px;border-radius:12px;border:1px solid var(--line);
+      background:rgba(255,255,255,.02);display:grid;place-items:center;cursor:pointer
+    }
+
+    /* LIST */
+    .list{margin-top:12px;display:flex;flex-direction:column;gap:10px}
+    .item{
       background:rgba(18,20,27,.72);
       border:1px solid var(--line);
-      border-radius:18px;padding:14px;
-      box-shadow:0 20px 60px rgba(0,0,0,.35);
+      border-radius:16px;
+      padding:12px;
+      display:flex;gap:12px;align-items:center;
+      box-shadow:0 18px 55px rgba(0,0,0,.32);
+      cursor:pointer;
     }
-    .row{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-    .title{margin:0;font-size:16px;font-weight:900}
-    .desc{margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.4}
-    .badge{
-      font-size:12px;font-weight:900;padding:8px 10px;border-radius:999px;
-      background:rgba(31,111,235,.12);border:1px solid rgba(31,111,235,.35);color:#b9d4ff;white-space:nowrap
+    .thumb{
+      width:46px;height:46px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      display:grid;place-items:center;
+      background:linear-gradient(135deg,#2f7dff,#7c3aed);
+      font-weight:900;color:#071018;
+      overflow:hidden;
     }
-    .line{height:1px;background:var(--line);margin:12px 0}
-    .label{display:block;font-size:12px;color:var(--muted);margin:10px 0 6px}
-    .select{
-      width:100%;padding:12px 12px;border-radius:14px;
-      border:1px solid var(--line);background:rgba(255,255,255,.02);
-      color:var(--text);outline:none
+    .thumb img{width:100%;height:100%;object-fit:cover}
+    .meta{min-width:0;flex:1}
+    .meta .name{margin:0;font-weight:900;font-size:14px}
+    .meta .sub{margin:3px 0 0;color:var(--muted);font-size:12px}
+    .price{font-weight:900;color:#9fd0ff;white-space:nowrap}
+
+    .foot{
+      margin-top:14px;color:var(--muted);font-size:12px;text-align:center
     }
-    .check{display:flex;gap:10px;align-items:center;font-size:13px}
-    .check input{transform:scale(1.2)}
-    .total{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
-    .price{font-weight:900;font-size:16px}
-    .actions{display:flex;gap:10px;margin-top:12px}
+
+    /* MODAL */
+    .overlay{
+      position:fixed;inset:0;
+      background:rgba(0,0,0,.55);
+      display:none;
+      align-items:flex-end;
+      z-index:50;
+    }
+    .sheet{
+      width:100%;
+      max-width:920px;
+      margin:0 auto;
+      background:rgba(15,18,26,.94);
+      border:1px solid var(--line);
+      border-bottom:0;
+      border-radius:20px 20px 0 0;
+      box-shadow:0 -30px 80px rgba(0,0,0,.5);
+      overflow:hidden;
+    }
+    .sheetHead{
+      background:linear-gradient(135deg,var(--g1),var(--g2));
+      padding:14px 14px 18px;
+      position:relative;
+    }
+    .sheetHead .cap{
+      text-align:center;
+      font-weight:900;
+      letter-spacing:.3px;
+    }
+    .closeX{
+      position:absolute;right:12px;top:10px;
+      width:36px;height:36px;border-radius:12px;
+      border:1px solid rgba(255,255,255,.25);
+      background:rgba(255,255,255,.08);
+      color:#fff;cursor:pointer;
+    }
+    .sheetBody{padding:14px}
+    .prodTitle{margin:2px 0 2px;text-align:center;font-weight:1000;font-size:16px}
+    .prodPrice{margin:0 0 12px;text-align:center;font-weight:1000;color:#b9d4ff;font-size:18px}
+
+    .box{
+      border:1px dashed rgba(47,125,255,.55);
+      background:rgba(47,125,255,.06);
+      border-radius:14px;
+      padding:12px;
+      color:#dbe7ff;
+      font-size:13px;
+      line-height:1.4;
+    }
+    .box b{display:block;margin-bottom:6px;color:#b9d4ff}
+
+    .row2{
+      display:flex;justify-content:space-between;align-items:center;
+      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)
+    }
+    .row2 span{color:var(--muted);font-size:13px}
+    .row2 strong{font-size:13px}
+
+    /* designer toggle */
+    .toggleWrap{
+      margin-top:12px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.02);
+      border-radius:14px;
+      padding:12px;
+      display:flex;align-items:center;justify-content:space-between;gap:12px
+    }
+    .toggleWrap .t1{font-weight:900}
+    .toggleWrap .t2{color:var(--muted);font-size:12px;margin-top:2px}
+    .switch{position:relative;width:52px;height:30px;flex:0 0 auto}
+    .switch input{display:none}
+    .track{
+      position:absolute;inset:0;border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      transition:.2s;
+    }
+    .dot{
+      position:absolute;top:4px;left:4px;
+      width:22px;height:22px;border-radius:999px;
+      background:rgba(255,255,255,.85);
+      transition:.2s;
+    }
+    .switch input:checked + .track{
+      background:linear-gradient(135deg,var(--g1),var(--g2));
+      border:0;
+    }
+    .switch input:checked + .track .dot{left:26px;background:#071018}
+
+    .actions{
+      margin-top:14px;display:flex;gap:10px
+    }
     .btn{
-      flex:1;display:flex;justify-content:center;align-items:center;
-      padding:12px 12px;border-radius:14px;border:1px solid var(--line);font-weight:900;
-      background:rgba(255,255,255,.02)
+      flex:1;padding:12px;border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.02);
+      color:var(--text);
+      font-weight:900;
+      text-align:center;
+      cursor:pointer;
     }
-    .primary{border:0;background:linear-gradient(135deg,var(--grad1),var(--grad2));color:#071018}
-    .note{margin-top:10px;color:var(--muted);font-size:12px}
-    .foot{margin-top:22px;border-top:1px solid var(--line);padding-top:14px;color:var(--muted);font-size:12px;text-align:center}
+    .btn.primary{
+      border:0;background:linear-gradient(135deg,var(--g1),var(--g2));
+      color:#071018;
+    }
+    .note{
+      margin-top:10px;color:var(--muted);font-size:12px;text-align:center
+    }
   </style>
 </head>
 <body>
 
 <header class="top">
-  <div class="brand">
-    <div class="logo">
-      <!-- Pakai file logo kamu: Logo.png atau logo.png (sesuai di repo) -->
-      <img src="Logo.png" alt="Endzyless Logo" onerror="this.remove(); this.parentElement.textContent='E';"/>
-    </div>
-    <div class="txt">
-      <h1>Endzyless Store • Canva</h1>
-      <p>Pilih produk → opsional Designer → lanjut detail</p>
+  <div class="left">
+    <a class="back" href="app-prem.html" aria-label="Kembali">←</a>
+    <div class="titleWrap">
+      <h1>App Prem</h1>
+      <p>Canva</p>
     </div>
   </div>
-  <a class="chip" href="app-prem.html">← Kembali</a>
+  <div class="chip" id="sortLabel">Termurah</div>
 </header>
 
 <main class="wrap">
-  <section class="hero">
-    <h2>Produk Canva</h2>
-    <p>Khusus Canva ada opsi <b>Designer +Rp1.000</b> (opsional). Total & tombol beli otomatis ikut berubah.</p>
-  </section>
+  <div class="filter">
+    <select class="sel" id="sort">
+      <option value="cheap" selected>Termurah</option>
+      <option value="expensive">Termahal</option>
+    </select>
+    <input class="inp" id="q" placeholder="Cari produk… (contoh: member, owner, 1 bulan)"/>
+    <button class="iconBtn" id="reset" title="Reset">⟲</button>
+  </div>
 
-  <section class="grid">
+  <section class="list" id="list"></section>
 
-    <!-- CARD 1: Canva Pro (paket bulanan) -->
-    <div class="card" data-product="Canva Pro">
-      <div class="row">
-        <div>
-          <p class="title">🎨 Canva Pro</p>
-          <p class="desc">Akses fitur pro. Pilih durasi paket. Tambah Designer kalau perlu.</p>
-        </div>
-        <div class="badge">Full Garansi</div>
+  <div class="foot">© <span id="y"></span> Endzyless Store</div>
+</main>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay">
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="Detail Produk">
+    <div class="sheetHead">
+      <div class="cap">Detail Produk</div>
+      <button class="closeX" id="close">✕</button>
+    </div>
+    <div class="sheetBody">
+      <div class="prodTitle" id="mTitle">-</div>
+      <div class="prodPrice" id="mPrice">Rp0</div>
+
+      <div class="box" id="mDescBox">
+        <b>Deskripsi Produk:</b>
+        <div id="mDesc">-</div>
       </div>
 
-      <div class="line"></div>
+      <!-- khusus Canva: add-on Designer -->
+      <div class="toggleWrap" id="designerWrap" style="display:none">
+        <div>
+          <div class="t1">Tambah Designer</div>
+          <div class="t2">+Rp1.000 (opsional, khusus Canva)</div>
+        </div>
+        <label class="switch" aria-label="Toggle Designer">
+          <input type="checkbox" id="designerToggle">
+          <div class="track"><div class="dot"></div></div>
+        </label>
+      </div>
 
-      <label class="label">Pilih paket</label>
-      <select class="select paket">
-        <option value="1 Bulan|5000">1 Bulan — Rp5.000</option>
-        <option value="2 Bulan|7000">2 Bulan — Rp7.000</option>
-        <option value="3 Bulan|9000">3 Bulan — Rp9.000</option>
-        <option value="4 Bulan|11000">4 Bulan — Rp11.000</option>
-        <option value="5 Bulan|13000">5 Bulan — Rp13.000</option>
-        <option value="6 Bulan|15000">6 Bulan — Rp15.000</option>
-        <option value="1 Tahun|28000">1 Tahun — Rp28.000</option>
-      </select>
-
-      <label class="label">Add-on</label>
-      <label class="check">
-        <input class="designer" type="checkbox"/>
-        <span>Designer +Rp1.000 (opsional)</span>
-      </label>
-
-      <div class="total">
-        <span>Total</span>
-        <span class="price totalText">Rp5.000</span>
+      <div class="row2">
+        <span>Total Pembayaran</span>
+        <strong id="mTotal">Rp0</strong>
       </div>
 
       <div class="actions">
-        <a class="btn tanya" target="_blank" rel="noreferrer">Tanya</a>
-        <a class="btn primary beli">Lanjutkan</a>
+        <a class="btn" id="btnTanya" target="_blank" rel="noreferrer">Kembali / Tanya</a>
+        <a class="btn primary" id="btnLanjut" target="_blank" rel="noreferrer">Lanjutkan</a>
       </div>
 
-      <div class="note">Detail transaksi akan muncul di halaman berikutnya.</div>
+      <div class="note">UI dulu. Pembayaran otomatis (Midtrans/QRIS) nanti nyambung di tombol “Lanjutkan”.</div>
     </div>
+  </div>
+</div>
 
-    <!-- CARD 2: Canva Member (contoh produk fixed) -->
-    <div class="card" data-product="Canva Member">
-      <div class="row">
-        <div>
+<script>
+  // ganti jika perlu
+  const WA = "6285141179499";
+
+  document.getElementById("y").textContent = new Date().getFullYear();
+
+  const rupiah = (n) => "Rp" + new Intl.NumberFormat("id-ID").format(n);
+
+  // DATA PRODUK CANVA (silakan edit harga/stok/nama)
+  const products = [
+    {
+      id:"cm1",
+      name:"Canva Member 1 Bulan",
+      stock:371,
+      price:5000,
+      desc:"VIA INVITE LINK. 1x beli = 1 customer. Garansi sesuai ketentuan admin.",
+      brand:"canva"
+    },
+    {
+      id:"cmy",
+      name:"Canva Member 1 Tahun",
+      stock:378,
+      price:28000,
+      desc:"VIA INVITE LINK. 1x beli = 1 customer. Garansi sesuai ketentuan admin.",
+      brand:"canva"
+    },
+    {
+      id:"co1",
+      name:"Canva Owner 1 Bulan",
+      stock:0,
+      price:3500,
+      desc:"Ketersediaan tergantung stok. Garansi sesuai ketentuan admin.",
+      brand:"canva"
+    },
+    {
+      id:"coy",
+      name:"Canva Owner 1 Tahun",
+      stock:12,
+      price:25000,
+      desc:"Ketersediaan tergantung stok. Garansi sesuai ketentuan admin.",
+      brand:"canva"
+    }
+  ];
+
+  const listEl = document.getElementById("list");
+  const sortEl = document.getElementById("sort");
+  const qEl = document.getElementById("q");
+  const resetEl = document.getElementById("reset");
+  const sortLabel = document.getElementById("sortLabel");
+
+  // modal elements
+  const overlay = document.getElementById("overlay");
+  const closeBtn = document.getElementById("close");
+  const mTitle = document.getElementById("mTitle");
+  const mPrice = document.getElementById("mPrice");
+  const mDesc = document.getElementById("mDesc");
+  const mTotal = document.getElementById("mTotal");
+  const designerWrap = document.getElementById("designerWrap");
+  const designerToggle = document.getElementById("designerToggle");
+  const btnTanya = document.getElementById("btnTanya");
+  const btnLanjut = document.getElementById("btnLanjut");
+
+  let activeProduct = null;
+
+  function getFiltered(){
+    const q = (qEl.value || "").toLowerCase().trim();
+    let arr = products.filter(p=>{
+      const hay = (p.name + " " + (p.stock??"") ).toLowerCase();
+      return q ? hay.includes(q) : true;
+    });
+
+    if(sortEl.value === "cheap"){
+      arr.sort((a,b)=>a.price-b.price);
+      sortLabel.textContent = "Termurah";
+    } else {
+      arr.sort((a,b)=>b.price-a.price);
+      sortLabel.textContent = "Termahal";
+    }
+    return arr;
+  }
+
+  function render(){
+    const arr = getFiltered();
+    listEl.innerHTML = "";
+    arr.forEach(p=>{
+      const item = document.createElement("div");
+      item.className = "item";
+      item.innerHTML = `
+        <div class="thumb"><span>C</span></div>
+        <div class="meta">
+          <p class="name">${p.name}</p>
+          <p class="sub">${p.name} • Stok ${p.stock}</p>
+        </div>
+        <div class="price">${rupiah(p.price)}</div>
+      `;
+      item.addEventListener("click", ()=>openDetail(p));
+      listEl.appendChild(item);
+    });
+  }
+
+  function openDetail(p){
+    activeProduct = p;
+
+    // reset toggle setiap buka
+    designerToggle.checked = false;
+
+    mTitle.textContent = p.name;
+    mPrice.textContent = rupiah(p.price);
+    mDesc.textContent = p.desc;
+
+    // Canva punya add-on Designer
+    designerWrap.style.display = (p.brand === "canva") ? "flex" : "none";
+
+    updateTotal();
+
+    // Tombol: Kembali/Tanya (di sini kita bikin ke WA biar aman)
+    btnTanya.textContent = "Tanya";
+    btnTanya.href = `https://wa.me/${WA}?text=${encodeURIComponent("Halo kak, saya mau tanya produk Canva.")}`;
+
+    overlay.style.display = "flex";
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeDetail(){
+    overlay.style.display = "none";
+    document.body.style.overflow = "";
+  }
+
+  function updateTotal(){
+    if(!activeProduct) return;
+    let total = activeProduct.price;
+    let addonText = "";
+    if(activeProduct.brand === "canva" && designerToggle.checked){
+      total += 1000;
+      addonText = " + Designer";
+    }
+    mTotal.textContent = rupiah(total);
+
+    // Lanjutkan (sementara ke WA dulu, nanti diganti ke Midtrans)
+    const msg = `Halo Endzyless Store, saya mau order ${activeProduct.name}${addonText}. Total ${rupiah(total)}.`;
+    btnLanjut.href = `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+  }
+
+  // events
+  sortEl.addEventListener("change", render);
+  qEl.addEventListener("input", render);
+  resetEl.addEventListener("click", ()=>{
+    sortEl.value = "cheap";
+    qEl.value = "";
+    render();
+  });
+
+  closeBtn.addEventListener("click", closeDetail);
+  overlay.addEventListener("click", (e)=>{
+    if(e.target === overlay) closeDetail();
+  });
+
+  designerToggle.addEventListener("change", updateTotal);
+
+  render();
+</script>
+
+</body>
+</html>        <div>
           <p class="title">👥 Canva Member</p>
           <p class="desc">Versi “member”. Pilih durasi, opsional Designer.</p>
         </div>
