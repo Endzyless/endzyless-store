@@ -13,26 +13,17 @@
       --ink:#eaf0ff;
       --muted:rgba(234,240,255,.72);
       --line:rgba(255,255,255,.10);
-      --card:rgba(0,0,0,.28);
-      --card2:rgba(0,0,0,.18);
       --shadow:0 12px 40px rgba(0,0,0,.35);
       --r:18px;
     }
-
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
       color:var(--ink);
-      background: linear-gradient(
-        to bottom,
-        var(--brandTop) 0%,
-        var(--brandMid) 55%,
-        var(--brandBot) 100%
-      );
+      background: linear-gradient(to bottom, var(--brandTop) 0%, var(--brandMid) 55%, var(--brandBot) 100%);
       min-height:100vh;
     }
-
     a{color:inherit;text-decoration:none}
     .wrap{max-width:860px;margin:0 auto;padding:14px 14px 28px}
 
@@ -46,9 +37,7 @@
       border-radius: 0 0 18px 18px;
     }
     .topRow{display:flex;align-items:center;justify-content:space-between;gap:10px}
-    .left{
-      display:flex;align-items:center;gap:10px;min-width:0;
-    }
+    .left{display:flex;align-items:center;gap:10px;min-width:0}
     .back{
       width:36px;height:36px;border-radius:12px;
       display:grid;place-items:center;
@@ -100,6 +89,7 @@
       background:rgba(255,255,255,.06);
       display:grid;place-items:center;
       font-size:18px;
+      color:var(--ink);
     }
 
     /* list */
@@ -111,7 +101,7 @@
       padding:12px;
       display:flex;gap:12px;align-items:center;
       box-shadow:0 12px 26px rgba(0,0,0,.25);
-      transition:transform .12s ease, opacity .12s ease;
+      transition:transform .12s ease;
     }
     .item:active{transform:scale(.99)}
     .avatar{
@@ -127,11 +117,9 @@
     .price{
       font-weight:1000;
       color:#d7e6ff;
-      opacity:.95;
       white-space:nowrap;
     }
 
-    /* footer */
     .foot{
       margin-top:14px;
       text-align:center;
@@ -139,10 +127,103 @@
       font-size:12px;
     }
 
-    /* hide removed section if old HTML still has it */
-    .fastProc, .checkoutBar, .bottomBar, .stickyBar, .orderBox, .detailNextNote {
-      display:none !important;
+    /* ===== Bottom-sheet (Detail Produk) ===== */
+    .overlay{
+      position:fixed;inset:0;
+      background:rgba(0,0,0,.55);
+      backdrop-filter: blur(2px);
+      display:none;
+      z-index:50;
     }
+    .overlay.show{display:block}
+    .sheet{
+      position:fixed;left:0;right:0;bottom:0;
+      max-width:860px;
+      margin:0 auto;
+      background:rgba(10,12,24,.92);
+      border:1px solid rgba(255,255,255,.12);
+      border-bottom:none;
+      border-radius:22px 22px 0 0;
+      box-shadow:0 -20px 60px rgba(0,0,0,.55);
+      transform:translateY(110%);
+      transition:transform .18s ease;
+      z-index:60;
+    }
+    .sheet.show{transform:translateY(0)}
+    .sheetHead{
+      padding:10px 14px 0;
+      display:flex;align-items:center;justify-content:center;
+      position:relative;
+    }
+    .grab{
+      width:54px;height:5px;border-radius:999px;
+      background:rgba(255,255,255,.18);
+      margin:6px 0 10px;
+    }
+    .sheetTitle{
+      width:100%;
+      margin:0 0 12px;
+      padding:12px 14px;
+      border-radius:16px;
+      background:linear-gradient(90deg, rgba(57,126,217,.95), rgba(90,55,231,.85));
+      text-align:center;
+      font-weight:1000;
+      border:1px solid rgba(255,255,255,.14);
+    }
+    .sheetBody{padding:0 14px 14px}
+    .prodName{margin:8px 0 2px;font-size:16px;font-weight:1000;text-align:center}
+    .prodPrice{margin:0 0 10px;font-size:18px;font-weight:1000;text-align:center;color:#d7e6ff}
+
+    .box{
+      border:1px dashed rgba(120,190,255,.8);
+      background:rgba(255,255,255,.04);
+      border-radius:16px;
+      padding:12px;
+      color:rgba(234,240,255,.92);
+      line-height:1.35;
+      font-size:13px;
+    }
+    .row{
+      display:flex;justify-content:space-between;align-items:center;
+      gap:12px;margin-top:10px;
+      color:rgba(234,240,255,.82);
+      font-size:13px;
+    }
+    .row strong{color:var(--ink)}
+    .divider{height:1px;background:rgba(255,255,255,.10);margin:12px 0}
+
+    .toggle{
+      display:flex;align-items:center;gap:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+    }
+    .toggle input{transform:scale(1.2)}
+    .toggle b{font-weight:1000}
+    .toggle span{color:rgba(234,240,255,.75);font-size:12px}
+
+    .actions{
+      display:flex;gap:10px;margin-top:14px;
+    }
+    .btn{
+      flex:1;
+      padding:12px 14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:var(--ink);
+      font-weight:1000;
+      text-align:center;
+    }
+    .btn.primary{
+      border:none;
+      background:linear-gradient(90deg, rgba(57,126,217,.95), rgba(90,55,231,.95));
+      color:white;
+    }
+
+    /* prevent old bottom bar */
+    .fastProc, .checkoutBar, .bottomBar, .stickyBar, .orderBox, .detailNextNote {display:none !important;}
   </style>
 </head>
 
@@ -156,7 +237,6 @@
           <p class="sub">Canva</p>
         </div>
       </div>
-
       <span class="pill" id="sortLabel">Termurah</span>
     </div>
   </header>
@@ -181,16 +261,87 @@
     </section>
   </main>
 
+  <!-- Overlay + Bottom Sheet -->
+  <div class="overlay" id="overlay"></div>
+
+  <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Detail Produk">
+    <div class="sheetHead">
+      <div class="grab"></div>
+    </div>
+
+    <div class="sheetBody">
+      <div class="sheetTitle">Detail Produk</div>
+
+      <div class="prodName" id="dpName">-</div>
+      <div class="prodPrice" id="dpPrice">Rp0</div>
+
+      <div class="box" id="dpDesc">
+        -
+      </div>
+
+      <div class="row">
+        <div>Sisa stok</div>
+        <strong id="dpStock">0</strong>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- Add-on Designer (khusus Canva) -->
+      <label class="toggle">
+        <input type="checkbox" id="addonDesigner"/>
+        <div>
+          <b>Designer +Rp1.000</b><br/>
+          <span>(opsional)</span>
+        </div>
+      </label>
+
+      <div class="row" style="margin-top:12px">
+        <div>Total pembayaran</div>
+        <strong id="dpTotal">Rp0</strong>
+      </div>
+
+      <div class="actions">
+        <button class="btn" id="btnClose" type="button">Kembali</button>
+        <button class="btn primary" id="btnNext" type="button">Lanjutkan</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     document.getElementById("y").textContent = new Date().getFullYear();
 
-    // Data produk (ubah sesuai kebutuhan)
     const PRODUCTS = [
-      { id:"canva-owner-1b",  name:"Canva Owner 1 Bulan",  stock:0,   price:3500 },
-      { id:"canva-member-1b", name:"Canva Member 1 Bulan", stock:371, price:5000 },
-      { id:"canva-owner-1t",  name:"Canva Owner 1 Tahun",  stock:12,  price:25000 },
-      { id:"canva-member-1t", name:"Canva Member 1 Tahun", stock:378, price:28000 },
+      {
+        id:"canva-owner-1b",
+        name:"Canva Owner 1 Bulan",
+        stock:0,
+        price:3500,
+        desc:"VIA INVITE LINK. 1x BELI = 1 CUST. GARANSI HANYA JIKA BF, DI LUAR ITU BUKAN TANGGUNG JAWAB ADMIN."
+      },
+      {
+        id:"canva-member-1b",
+        name:"Canva Member 1 Bulan",
+        stock:371,
+        price:5000,
+        desc:"VIA INVITE LINK. 1x BELI = 1 CUST. GARANSI HANYA JIKA BF, DI LUAR ITU BUKAN TANGGUNG JAWAB ADMIN."
+      },
+      {
+        id:"canva-owner-1t",
+        name:"Canva Owner 1 Tahun",
+        stock:12,
+        price:25000,
+        desc:"VIA INVITE LINK. 1x BELI = 1 CUST. GARANSI HANYA JIKA BF, DI LUAR ITU BUKAN TANGGUNG JAWAB ADMIN."
+      },
+      {
+        id:"canva-member-1t",
+        name:"Canva Member 1 Tahun",
+        stock:378,
+        price:28000,
+        desc:"VIA INVITE LINK. 1x BELI = 1 CUST. GARANSI HANYA JIKA BF, DI LUAR ITU BUKAN TANGGUNG JAWAB ADMIN."
+      },
     ];
+
+    const DESIGNER_ADDON = 1000;
 
     const rupiah = (n) => "Rp" + new Intl.NumberFormat("id-ID").format(n);
 
@@ -200,6 +351,20 @@
     const sortLabel = document.getElementById("sortLabel");
     const clearBtn = document.getElementById("clear");
 
+    // Sheet refs
+    const overlay = document.getElementById("overlay");
+    const sheet = document.getElementById("sheet");
+    const dpName = document.getElementById("dpName");
+    const dpPrice = document.getElementById("dpPrice");
+    const dpDesc = document.getElementById("dpDesc");
+    const dpStock = document.getElementById("dpStock");
+    const dpTotal = document.getElementById("dpTotal");
+    const addon = document.getElementById("addonDesigner");
+    const btnClose = document.getElementById("btnClose");
+    const btnNext = document.getElementById("btnNext");
+
+    let current = null;
+
     function render() {
       const q = (qEl.value || "").trim().toLowerCase();
       const mode = sortEl.value;
@@ -208,13 +373,11 @@
         mode === "cheap" ? "Termurah" :
         mode === "exp"   ? "Termahal" : "Nama";
 
-      let items = PRODUCTS
-        .filter(p => {
-          if (!q) return true;
-          const blob = `${p.name} ${p.stock} ${p.price}`.toLowerCase();
-          return blob.includes(q);
-        })
-        .slice();
+      let items = PRODUCTS.filter(p => {
+        if (!q) return true;
+        const blob = `${p.name} ${p.stock} ${p.price}`.toLowerCase();
+        return blob.includes(q);
+      }).slice();
 
       items.sort((a,b) => {
         if (mode === "cheap") return a.price - b.price;
@@ -223,14 +386,14 @@
       });
 
       listEl.innerHTML = items.map(p => `
-        <a class="item" href="javascript:void(0)" onclick="openDetail('${p.id}')">
+        <div class="item" role="button" tabindex="0" onclick="openDetail('${p.id}')">
           <div class="avatar">C</div>
           <div class="meta">
             <p class="name">${p.name}</p>
             <p class="desc">${p.name} • Stok ${p.stock}</p>
           </div>
           <div class="price">${rupiah(p.price)}</div>
-        </a>
+        </div>
       `).join("");
 
       if (items.length === 0) {
@@ -242,13 +405,52 @@
       }
     }
 
-    // Untuk sekarang: klik item belum buka detail (nanti kita bikin modal detail produk)
+    function openSheet(){
+      overlay.classList.add("show");
+      sheet.classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+    function closeSheet(){
+      overlay.classList.remove("show");
+      sheet.classList.remove("show");
+      document.body.style.overflow = "";
+      addon.checked = false;
+      current = null;
+    }
+
+    function updateTotal(){
+      if (!current) return;
+      const total = current.price + (addon.checked ? DESIGNER_ADDON : 0);
+      dpTotal.textContent = rupiah(total);
+    }
+
     window.openDetail = (id) => {
-      // sementara hanya contoh
       const p = PRODUCTS.find(x => x.id === id);
       if (!p) return;
-      alert(`Detail Produk\\n\\n${p.name}\\nHarga: ${rupiah(p.price)}\\nStok: ${p.stock}\\n\\n(Nanti ini diganti jadi modal detail produk + opsi Designer +Rp1.000)`);
+
+      current = p;
+      dpName.textContent = p.name;
+      dpPrice.textContent = rupiah(p.price);
+      dpDesc.textContent = "Deskripsi Produk:\n" + p.desc;
+      dpStock.textContent = p.stock;
+
+      addon.checked = false;
+      updateTotal();
+      openSheet();
     };
+
+    overlay.addEventListener("click", closeSheet);
+    btnClose.addEventListener("click", closeSheet);
+    addon.addEventListener("change", updateTotal);
+
+    // UI dulu: tombol lanjutkan masih dummy
+    btnNext.addEventListener("click", () => {
+      if (!current) return;
+      // nanti bisa diarahkan ke halaman QRIS / midtrans
+      alert("Next step (UI dulu): lanjut ke pembayaran/QRIS.\n\nProduk: " + current.name +
+            "\nDesigner: " + (addon.checked ? "Ya (+Rp1.000)" : "Tidak") +
+            "\nTotal: " + dpTotal.textContent);
+    });
 
     clearBtn.addEventListener("click", () => { qEl.value=""; render(); });
     qEl.addEventListener("input", render);
