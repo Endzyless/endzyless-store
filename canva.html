@@ -1,115 +1,241 @@
 <!doctype html>
 <html lang="id">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Canva - Endzyless Store</title>
-
-<style>
-:root{
---bg:#0b0f1f;
---card:#12182b;
---line:#1f2740;
---text:#ffffff;
---muted:#9aa4c7;
---grad:linear-gradient(135deg,#3b82f6,#6366f1);
-}
-
-*{box-sizing:border-box}
-
-body{
-margin:0;
-font-family:system-ui;
-background:var(--bg);
-color:var(--text);
-}
-
-a{text-decoration:none;color:inherit}
-
-.header{
-padding:16px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-border-bottom:1px solid var(--line);
-}
-
-.wrap{
-max-width:900px;
-margin:auto;
-padding:20px;
-}
-
-.title{
-font-size:22px;
-font-weight:800;
-margin-bottom:20px;
-}
-
-.list{
-display:flex;
-flex-direction:column;
-gap:14px;
-}
-
-.card{
-background:var(--card);
-border:1px solid var(--line);
-padding:16px;
-border-radius:16px;
-transition:0.2s;
-}
-
-.card:hover{
-border-color:#4f46e5;
-transform:translateY(-2px);
-}
-
-.row{
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.name{
-font-weight:700;
-}
-
-.stock{
-font-size:12px;
-color:var(--muted);
-margin-top:4px;
-}
-
-.price{
-font-weight:800;
-font-size:16px;
-background:var(--grad);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-}
-
-.back{
-display:inline-block;
-margin-top:25px;
-padding:10px 14px;
-border-radius:12px;
-border:1px solid var(--line);
-color:var(--muted);
-}
-
-</style>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Canva • Endzyless Store</title>
+  <style>
+    :root{
+      --bg1:#0b0c10; --card:#12141b; --text:#e8eaf0; --muted:#a9afc3; --line:#212534;
+      --grad1:#1f6feb; --grad2:#7c3aed; --soft: rgba(255,255,255,.04);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#0b0c10 0%, #0a1020 60%, #0b0c10 100%);color:var(--text)}
+    a{text-decoration:none;color:inherit}
+    .top{
+      position:sticky;top:0;z-index:10;
+      background:rgba(11,12,16,.78);backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+      padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px
+    }
+    .brand{display:flex;gap:12px;align-items:center;min-width:0}
+    .logo{
+      width:44px;height:44px;border-radius:16px;
+      background:linear-gradient(135deg,var(--grad1),var(--grad2));
+      display:grid;place-items:center;font-weight:900;color:#071018;flex:0 0 auto;
+      overflow:hidden;
+    }
+    .logo img{width:100%;height:100%;object-fit:cover}
+    .brand .txt{min-width:0}
+    .brand h1{margin:0;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .brand p{margin:2px 0 0;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .chip{
+      padding:10px 12px;border:1px solid var(--line);border-radius:999px;
+      font-size:12px;background:rgba(255,255,255,.02)
+    }
+    .wrap{max-width:980px;margin:0 auto;padding:18px 16px 60px}
+    .hero{padding:10px 0 14px}
+    .hero h2{margin:0 0 6px;font-size:22px}
+    .hero p{margin:0;color:var(--muted);line-height:1.45}
+    .grid{display:grid;gap:12px}
+    .card{
+      background:rgba(18,20,27,.72);
+      border:1px solid var(--line);
+      border-radius:18px;padding:14px;
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+    }
+    .row{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+    .title{margin:0;font-size:16px;font-weight:900}
+    .desc{margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.4}
+    .badge{
+      font-size:12px;font-weight:900;padding:8px 10px;border-radius:999px;
+      background:rgba(31,111,235,.12);border:1px solid rgba(31,111,235,.35);color:#b9d4ff;white-space:nowrap
+    }
+    .line{height:1px;background:var(--line);margin:12px 0}
+    .label{display:block;font-size:12px;color:var(--muted);margin:10px 0 6px}
+    .select{
+      width:100%;padding:12px 12px;border-radius:14px;
+      border:1px solid var(--line);background:rgba(255,255,255,.02);
+      color:var(--text);outline:none
+    }
+    .check{display:flex;gap:10px;align-items:center;font-size:13px}
+    .check input{transform:scale(1.2)}
+    .total{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+    .price{font-weight:900;font-size:16px}
+    .actions{display:flex;gap:10px;margin-top:12px}
+    .btn{
+      flex:1;display:flex;justify-content:center;align-items:center;
+      padding:12px 12px;border-radius:14px;border:1px solid var(--line);font-weight:900;
+      background:rgba(255,255,255,.02)
+    }
+    .primary{border:0;background:linear-gradient(135deg,var(--grad1),var(--grad2));color:#071018}
+    .note{margin-top:10px;color:var(--muted);font-size:12px}
+    .foot{margin-top:22px;border-top:1px solid var(--line);padding-top:14px;color:var(--muted);font-size:12px;text-align:center}
+  </style>
 </head>
-
 <body>
 
-<div class="header">
-<strong>Canva</strong>
-<a href="app-prem.html">← Kembali</a>
-</div>
+<header class="top">
+  <div class="brand">
+    <div class="logo">
+      <!-- Pakai file logo kamu: Logo.png atau logo.png (sesuai di repo) -->
+      <img src="Logo.png" alt="Endzyless Logo" onerror="this.remove(); this.parentElement.textContent='E';"/>
+    </div>
+    <div class="txt">
+      <h1>Endzyless Store • Canva</h1>
+      <p>Pilih produk → opsional Designer → lanjut detail</p>
+    </div>
+  </div>
+  <a class="chip" href="app-prem.html">← Kembali</a>
+</header>
 
-<div class="wrap">
+<main class="wrap">
+  <section class="hero">
+    <h2>Produk Canva</h2>
+    <p>Khusus Canva ada opsi <b>Designer +Rp1.000</b> (opsional). Total & tombol beli otomatis ikut berubah.</p>
+  </section>
 
+  <section class="grid">
+
+    <!-- CARD 1: Canva Pro (paket bulanan) -->
+    <div class="card" data-product="Canva Pro">
+      <div class="row">
+        <div>
+          <p class="title">🎨 Canva Pro</p>
+          <p class="desc">Akses fitur pro. Pilih durasi paket. Tambah Designer kalau perlu.</p>
+        </div>
+        <div class="badge">Full Garansi</div>
+      </div>
+
+      <div class="line"></div>
+
+      <label class="label">Pilih paket</label>
+      <select class="select paket">
+        <option value="1 Bulan|5000">1 Bulan — Rp5.000</option>
+        <option value="2 Bulan|7000">2 Bulan — Rp7.000</option>
+        <option value="3 Bulan|9000">3 Bulan — Rp9.000</option>
+        <option value="4 Bulan|11000">4 Bulan — Rp11.000</option>
+        <option value="5 Bulan|13000">5 Bulan — Rp13.000</option>
+        <option value="6 Bulan|15000">6 Bulan — Rp15.000</option>
+        <option value="1 Tahun|28000">1 Tahun — Rp28.000</option>
+      </select>
+
+      <label class="label">Add-on</label>
+      <label class="check">
+        <input class="designer" type="checkbox"/>
+        <span>Designer +Rp1.000 (opsional)</span>
+      </label>
+
+      <div class="total">
+        <span>Total</span>
+        <span class="price totalText">Rp5.000</span>
+      </div>
+
+      <div class="actions">
+        <a class="btn tanya" target="_blank" rel="noreferrer">Tanya</a>
+        <a class="btn primary beli">Lanjutkan</a>
+      </div>
+
+      <div class="note">Detail transaksi akan muncul di halaman berikutnya.</div>
+    </div>
+
+    <!-- CARD 2: Canva Member (contoh produk fixed) -->
+    <div class="card" data-product="Canva Member">
+      <div class="row">
+        <div>
+          <p class="title">👥 Canva Member</p>
+          <p class="desc">Versi “member”. Pilih durasi, opsional Designer.</p>
+        </div>
+        <div class="badge">Fast Process</div>
+      </div>
+
+      <div class="line"></div>
+
+      <label class="label">Pilih paket</label>
+      <select class="select paket">
+        <option value="1 Bulan|5000">1 Bulan — Rp5.000</option>
+        <option value="3 Bulan|9000">3 Bulan — Rp9.000</option>
+        <option value="6 Bulan|15000">6 Bulan — Rp15.000</option>
+        <option value="1 Tahun|28000">1 Tahun — Rp28.000</option>
+      </select>
+
+      <label class="label">Add-on</label>
+      <label class="check">
+        <input class="designer" type="checkbox"/>
+        <span>Designer +Rp1.000 (opsional)</span>
+      </label>
+
+      <div class="total">
+        <span>Total</span>
+        <span class="price totalText">Rp5.000</span>
+      </div>
+
+      <div class="actions">
+        <a class="btn tanya" target="_blank" rel="noreferrer">Tanya</a>
+        <a class="btn primary beli">Lanjutkan</a>
+      </div>
+
+      <div class="note">Detail transaksi akan muncul di halaman berikutnya.</div>
+    </div>
+
+  </section>
+
+  <div class="foot">© <span id="y"></span> Endzyless Store</div>
+</main>
+
+<script>
+  document.getElementById("y").textContent = new Date().getFullYear();
+
+  const WA = "6285141179499"; // WA kamu
+  const rupiah = (n) => "Rp" + new Intl.NumberFormat("id-ID").format(n);
+
+  function buildDetailLink(params) {
+    const q = new URLSearchParams(params);
+    return "detail.html?" + q.toString();
+  }
+
+  function updateCard(card){
+    const paketEl = card.querySelector(".paket");
+    const desEl   = card.querySelector(".designer");
+    const totalEl = card.querySelector(".totalText");
+    const tanyaEl = card.querySelector(".tanya");
+    const beliEl  = card.querySelector(".beli");
+
+    const productBase = card.getAttribute("data-product") || "Canva";
+    const [durasi, hargaStr] = paketEl.value.split("|");
+    let harga = parseInt(hargaStr, 10);
+
+    const addDesigner = desEl.checked;
+    if(addDesigner) harga += 1000;
+
+    totalEl.textContent = rupiah(harga);
+
+    const addonText = addDesigner ? " + Designer" : "";
+    const namaProduk = `${productBase} (${durasi}${addonText})`;
+
+    // Tombol Tanya ke WA
+    tanyaEl.href = `https://wa.me/${WA}?text=${encodeURIComponent("Halo kak, saya mau tanya produk Canva.")}`;
+
+    // Tombol Lanjutkan ke detail.html (UI dulu)
+    beliEl.href = buildDetailLink({
+      produk: namaProduk,
+      harga: harga,
+      base: productBase,
+      durasi: durasi,
+      designer: addDesigner ? "1" : "0"
+    });
+  }
+
+  document.querySelectorAll(".card").forEach(card=>{
+    const paketEl = card.querySelector(".paket");
+    const desEl   = card.querySelector(".designer");
+    paketEl.addEventListener("change", ()=>updateCard(card));
+    desEl.addEventListener("change", ()=>updateCard(card));
+    updateCard(card);
+  });
+</script>
+</body>
+</html>
 <div class="title">Produk Canva</div>
 
 <div class="list">
