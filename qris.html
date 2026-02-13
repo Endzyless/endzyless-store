@@ -133,8 +133,7 @@ input{
 <body>
 
 <div class="topbar">
-  <div>← Kembali</div>
-  <div>QRIS</div>
+  <a class="back" id="backBtn" href="canva.html">← Kembali</a>
 </div>
 
 <div class="wrap">
@@ -186,6 +185,13 @@ Kirim Bukti ke WhatsApp
 </div>
 
 <script>
+  // tombol kembali: kalau ada history, balik. kalau tidak, fallback ke canva.html
+document.getElementById("backBtn").addEventListener("click", (e) => {
+  if (history.length > 1) {
+    e.preventDefault();
+    history.back();
+  }
+});
 
 // ===== DATA TOKO =====
 const waNumber = "6285141179499";
