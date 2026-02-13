@@ -4,668 +4,118 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Endzyless Store</title>
-  <meta name="theme-color" content="#1b69ff"/>
   <style>
     :root{
-      --bg1:#1b69ff;
-      --bg2:#5a2fff;
-      --panel: rgba(10,12,18,.55);
-      --card: rgba(255,255,255,.06);
-      --line: rgba(255,255,255,.10);
-      --text:#f2f5ff;
-      --muted: rgba(242,245,255,.72);
-      --accent:#2ee6ff;
-      --accent2:#7b5cff;
-      --shadow: 0 18px 60px rgba(0,0,0,.35);
-      --radius: 22px;
+      --bg:#070913;
+      --card:#0f1222;
+      --text:#eef1ff;
+      --muted:#a7b0d6;
+      --line:rgba(255,255,255,.10);
+      --brand1:#2f7dff;
+      --brand2:#5a38ff;
     }
-
     *{box-sizing:border-box}
     body{
-      margin:0;
-      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
       color:var(--text);
-      background: linear-gradient(180deg,var(--bg1),var(--bg2));
-      min-height:100vh;
+      background:
+        radial-gradient(1200px 500px at 20% -10%, rgba(47,125,255,.35), transparent 60%),
+        radial-gradient(900px 450px at 90% 0%, rgba(90,56,255,.35), transparent 55%),
+        linear-gradient(180deg, #050611 0%, #070913 100%);
     }
-    a{color:inherit;text-decoration:none}
-    button{font-family:inherit}
-
+    a{text-decoration:none;color:inherit}
     .top{
-      position:sticky; top:0; z-index:10;
-      padding:14px 14px 10px;
-      background: linear-gradient(180deg, rgba(10,12,18,.55), rgba(10,12,18,.10));
-      backdrop-filter: blur(10px);
+      position:sticky;top:0;z-index:10;
+      background:rgba(7,9,19,.72);backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+      padding:12px 14px;display:flex;align-items:center;justify-content:space-between;
     }
-    .nav{
-      max-width:980px; margin:0 auto;
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      padding:10px 12px;
-      border:1px solid var(--line);
-      background: rgba(10,12,18,.40);
-      border-radius: 999px;
-      box-shadow: var(--shadow);
-    }
-    .brand{display:flex; align-items:center; gap:12px; min-width:0}
+    .brand{display:flex;gap:10px;align-items:center;min-width:0}
     .brand img{
-      width:44px; height:44px; border-radius:14px;
-      object-fit:cover; border:1px solid rgba(255,255,255,.18);
-      background: rgba(255,255,255,.06);
-      flex:0 0 auto;
-    }
-    .brand .t{min-width:0}
-    .brand .t b{display:block; font-size:16px; line-height:1.1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-    .brand .t small{display:block; color:var(--muted); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-    .pill{
-      padding:10px 14px; border-radius:999px;
-      border:1px solid rgba(123,92,255,.45);
-      background: rgba(123,92,255,.14);
-      color:rgba(242,245,255,.92);
-      font-weight:800; font-size:13px;
-      flex:0 0 auto;
-    }
-
-    .wrap{max-width:980px; margin:0 auto; padding:14px 14px 60px}
-
-    .hero{
-      padding:16px 4px 12px;
-    }
-    .hero h1{margin:0 0 6px; font-size:30px; letter-spacing:.2px}
-    .hero p{margin:0; color:var(--muted); line-height:1.5}
-
-    .panel{
-      margin-top:12px;
-      border-radius: var(--radius);
-      border:1px solid var(--line);
-      background: var(--panel);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-
-    .panelHead{
-      padding:14px 14px;
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
-      background: rgba(255,255,255,.04);
-      border-bottom:1px solid rgba(255,255,255,.07);
-    }
-    .panelHead .left{
-      display:flex; align-items:center; gap:10px;
-      min-width:0;
-    }
-    .back{
-      display:none;
-      padding:10px 12px;
-      border-radius:14px;
+      width:40px;height:40px;border-radius:12px;object-fit:cover;
       border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      font-weight:900; font-size:13px;
-      cursor:pointer;
+      background:rgba(255,255,255,.04);
     }
-    .panelTitle{
-      font-weight:900;
-      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-    }
-
-    .grid{
-      padding:14px;
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap:12px;
-    }
-    .tile{
-      padding:16px 14px;
-      border-radius: 18px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.06);
-      box-shadow: 0 12px 30px rgba(0,0,0,.22);
-      cursor:pointer;
-      transition: transform .15s ease, background .15s ease, border-color .15s ease;
-      user-select:none;
-      min-height:86px;
-      display:flex; flex-direction:column; justify-content:center;
-    }
-    .tile:hover{transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.16)}
-    .tile b{font-size:15px}
-    .tile small{color:var(--muted); margin-top:4px; line-height:1.35}
-
-    .list{padding:10px 14px 14px}
-    .search{
-      display:flex; gap:10px; align-items:center;
-      padding:12px;
-      border-radius: 16px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.05);
-      margin:10px 0 12px;
-    }
-    .search input{
-      width:100%;
-      border:0; outline:0;
-      background:transparent; color:var(--text);
-      font-size:14px;
-    }
-    .items{display:flex; flex-direction:column; gap:10px}
-    .item{
-      padding:14px 14px;
-      border-radius: 18px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.06);
-      cursor:pointer;
-    }
-    .item b{display:block; font-size:15px}
-    .item small{display:block; color:var(--muted); margin-top:4px}
-
-    .detail{padding:14px}
-    .card{
-      border-radius: 22px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.06);
-      padding:16px;
-    }
-    .row{display:flex; justify-content:space-between; gap:10px; align-items:flex-start}
-    .badge{
-      font-size:12px; font-weight:900;
-      padding:8px 10px; border-radius:999px;
-      background: rgba(46,230,255,.12);
-      border:1px solid rgba(46,230,255,.35);
-      color: rgba(232,253,255,.95);
-      white-space:nowrap;
-    }
-    .title{margin:0 0 6px; font-size:16px; font-weight:1000}
-    .desc{margin:0; color:var(--muted); font-size:13px; line-height:1.45}
-
-    .chips{display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 14px}
+    .brand h1{margin:0;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .brand p{margin:2px 0 0;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .chip{
-      font-size:12px; color: rgba(242,245,255,.80);
-      padding:8px 10px; border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
+      padding:10px 12px;border-radius:999px;font-size:12px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.03);
     }
+    .wrap{max-width:920px;margin:0 auto;padding:14px 14px 40px}
+    .hero{padding:10px 0 6px}
+    .hero h2{margin:0 0 6px;font-size:22px;letter-spacing:.2px}
+    .hero p{margin:0;color:var(--muted);line-height:1.45}
 
-    label{display:block; font-size:12px; color:var(--muted); margin:10px 0 6px}
-    select{
-      width:100%;
-      padding:12px 12px;
-      border-radius: 16px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.05);
-      color: var(--text);
-      outline:none;
+    .sectionTitle{margin:16px 0 10px;color:rgba(238,241,255,.9);font-weight:800;font-size:13px}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius:18px;padding:14px;display:flex;gap:12px;align-items:center;
+      box-shadow:0 14px 40px rgba(0,0,0,.35);
+      transition:transform .12s ease, border-color .12s ease;
     }
-    .check{display:flex; gap:10px; align-items:center; margin-top:8px}
-    .check input{transform:scale(1.2)}
-    .total{
-      margin-top:12px;
-      display:flex; align-items:center; justify-content:space-between;
-      font-weight:1000;
+    .card:active{transform:scale(.985)}
+    .icon{
+      width:44px;height:44px;border-radius:16px;
+      background:linear-gradient(135deg,var(--brand1),var(--brand2));
+      display:grid;place-items:center;
+      color:#0a0f20;font-weight:900;
+      box-shadow:0 10px 24px rgba(47,125,255,.25);
+      flex:0 0 auto;
     }
-    .price{font-size:18px}
-    .actions{display:flex; gap:10px; margin-top:12px}
-    .btn{
-      flex:1;
-      display:flex; align-items:center; justify-content:center;
-      padding:12px 12px;
-      border-radius: 16px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      font-weight:1000;
-    }
-    .primary{
-      border:0;
-      background: linear-gradient(135deg, var(--accent2), var(--accent));
-      color:#071018;
-    }
-    .note{margin-top:12px; color:var(--muted); font-size:12px; line-height:1.45}
-
-    .footer{
-      padding:18px 10px 0;
-      text-align:center;
-      color: rgba(242,245,255,.72);
-      font-size:12px;
-    }
-
-    /* Mobile tweak */
-    @media (min-width:720px){
-      .grid{grid-template-columns: repeat(3, minmax(0,1fr))}
-    }
-
-    /* Views */
-    .view{display:none}
-    .view.active{display:block}
+    .meta{min-width:0}
+    .meta .t{margin:0;font-weight:900}
+    .meta .s{margin:4px 0 0;color:var(--muted);font-size:12px;line-height:1.2}
+    .foot{margin-top:18px;border-top:1px solid var(--line);padding-top:14px;color:var(--muted);font-size:12px;text-align:center}
+    @media (min-width:700px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
   </style>
 </head>
-
 <body>
   <header class="top">
-    <div class="nav">
-      <div class="brand">
-        <!-- Pastikan file logo.png ada di repo (root) -->
-        <img src="logo.png" alt="Endzyless Store Logo" onerror="this.style.display='none'">
-        <div class="t">
-          <b>Endzyless Store</b>
-          <small>Semua kebutuhan digitalmu ada disini!</small>
-        </div>
-      </div>
-      <a class="pill" href="#home">Home</a>
-    </div>
-  </header>
-
-  <main class="wrap">
-    <section class="hero">
-      <h1>Belanja produk digital tanpa ribet</h1>
-      <p>Pilih kategori → pilih produk → klik beli. (Nanti tombolnya tinggal disambung QRIS otomatis.)</p>
-    </section>
-
-    <section class="panel">
-      <div class="panelHead">
-        <div class="left">
-          <button id="btnBack" class="back" type="button">← Kembali</button>
-          <div id="panelTitle" class="panelTitle">Menu</div>
-        </div>
-        <div style="color:var(--muted);font-size:12px" id="crumb">Home</div>
-      </div>
-
-      <!-- HOME -->
-      <div id="viewHome" class="view active">
-        <div class="grid">
-          <div class="tile" data-go="apps">
-            <b>🧩 Aplikasi Premium</b>
-            <small>Pilih Canva, CapCut, Netflix, dll</small>
-          </div>
-          <div class="tile" data-go="smm">
-            <b>📣 Sosial Media Marketing</b>
-            <small>Jasa & paket promosi (bisa diisi belakangan)</small>
-          </div>
-        </div>
-      </div>
-
-      <!-- APPS LIST -->
-      <div id="viewApps" class="view">
-        <div class="list">
-          <div class="search">
-            🔎 <input id="qApps" placeholder="Cari aplikasi… (contoh: canva, netflix)" autocomplete="off"/>
-          </div>
-          <div id="appsItems" class="items"></div>
-        </div>
-      </div>
-
-      <!-- SMM LIST -->
-      <div id="viewSmm" class="view">
-        <div class="list">
-          <div class="search">
-            🧾 <input id="qSmm" placeholder="Cari layanan… (contoh: ig, tiktok)" autocomplete="off"/>
-          </div>
-          <div id="smmItems" class="items"></div>
-        </div>
-      </div>
-
-      <!-- DETAIL PRODUCT -->
-      <div id="viewDetail" class="view">
-        <div class="detail">
-          <div class="card">
-            <div class="row">
-              <div>
-                <p id="dTitle" class="title">Produk</p>
-                <p id="dDesc" class="desc">Deskripsi produk.</p>
-              </div>
-              <div id="dBadge" class="badge">Full Garansi</div>
-            </div>
-
-            <div id="dChips" class="chips"></div>
-
-            <label>Pilih paket</label>
-            <select id="paket"></select>
-
-            <label>Add-on</label>
-            <label class="check">
-              <input id="addon" type="checkbox"/>
-              <span id="addonText">Add-on +Rp0</span>
-            </label>
-
-            <div class="total">
-              <span>Total</span>
-              <span id="total" class="price">Rp0</span>
-            </div>
-
-            <div class="actions">
-              <a id="tanya" class="btn" target="_blank" rel="noreferrer">Tanya</a>
-              <a id="beli" class="btn primary" target="_blank" rel="noreferrer">Beli</a>
-            </div>
-
-            <div class="note">
-              Catatan: Produk digital. Detail dikirim setelah pembayaran terkonfirmasi.
-            </div>
-          </div>
-
-          <div class="footer">© <span id="year"></span> Endzyless Store</div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-<script>
-  // ====== CONFIG ======
-  const WA = "6285141179499"; // WA kamu (format 62, tanpa 0)
-
-  // Data contoh — tinggal kamu edit/ambahin
-  const APPS = [
-    {
-      key: "canva",
-      name: "🎨 Canva Pro",
-      desc: "Akses Canva Pro untuk desain cepat, rapi, dan profesional — cocok untuk semua kebutuhan visual.",
-      badge: "Full Garansi",
-      chips: ["Akses fitur pro tanpa batas", "Ribuan template siap pakai", "Elemen, font, aset eksklusif", "Konten • Presentasi • Branding"],
-      addonLabel: "Designer",
-      addonPrice: 1000,
-      packages: [
-        ["1 Bulan", 5000],
-        ["2 Bulan", 7000],
-        ["3 Bulan", 9000],
-        ["4 Bulan", 11000],
-        ["5 Bulan", 13000],
-        ["6 Bulan", 15000],
-        ["1 Tahun", 28000]
-      ]
-    },
-    { key:"capcut", name:"🎬 CapCut Pro", desc:"Edit video lebih cepat dengan fitur premium.", badge:"Full Garansi",
-      chips:["Template premium","Export lebih leluasa","Cocok konten harian"], addonLabel:"Fast Support", addonPrice:0,
-      packages:[["1 Bulan",9000],["3 Bulan",23000]]
-    },
-    { key:"netflix", name:"🍿 Netflix", desc:"Nonton film & series (opsi paket bisa kamu atur).", badge:"Garansi",
-      chips:["Bisa request profil","Proses cepat"], addonLabel:"Extra Screen", addonPrice:0,
-      packages:[["1 Bulan",15000]]
-    }
-  ];
-
-  const SMM = [
-    { key:"igboost", name:"📈 IG Boost", desc:"Paket peningkatan performa IG (isi nanti)."},
-    { key:"tiktok", name:"🎵 TikTok Marketing", desc:"Paket promo TikTok (isi nanti)."}
-  ];
-
-  // ====== Helpers ======
-  const rupiah = (n) => "Rp" + new Intl.NumberFormat("id-ID").format(n);
-  const $ = (id) => document.getElementById(id);
-
-  $("year").textContent = new Date().getFullYear();
-
-  // ====== Views ======
-  const views = {
-    home: $("viewHome"),
-    apps: $("viewApps"),
-    smm: $("viewSmm"),
-    detail: $("viewDetail")
-  };
-
-  function setView(name, title, crumb, showBack){
-    Object.values(views).forEach(v => v.classList.remove("active"));
-    views[name].classList.add("active");
-    $("panelTitle").textContent = title || "Menu";
-    $("crumb").textContent = crumb || "Home";
-    $("btnBack").style.display = showBack ? "inline-flex" : "none";
-  }
-
-  // Simple hash router
-  function route(){
-    const h = (location.hash || "#home").replace("#","");
-    if(h === "home"){ setView("home","Menu","Home", false); return; }
-    if(h === "apps"){ setView("apps","Aplikasi Premium","Home / Aplikasi Premium", true); return; }
-    if(h === "smm"){ setView("smm","Sosial Media Marketing","Home / Sosial Media Marketing", true); return; }
-    // detail: #p=canva
-    if(h.startsWith("p=")){
-      const key = h.split("p=")[1];
-      openDetailByKey(key);
-      return;
-    }
-    // fallback
-    location.hash = "#home";
-  }
-
-  $("btnBack").addEventListener("click", () => {
-    // Back logic based on current view
-    if(views.detail.classList.contains("active")){
-      // if product is app -> go apps, else go smm
-      const from = $("viewDetail").dataset.from || "home";
-      location.hash = from === "apps" ? "#apps" : (from === "smm" ? "#smm" : "#home");
-    } else {
-      location.hash = "#home";
-    }
-  });
-
-  // Home tiles
-  document.querySelectorAll(".tile").forEach(t => {
-    t.addEventListener("click", () => {
-      const go = t.dataset.go;
-      location.hash = "#" + go;
-    });
-  });
-
-  // ====== Render lists ======
-  function renderApps(filter=""){
-    const wrap = $("appsItems");
-    wrap.innerHTML = "";
-    const q = filter.trim().toLowerCase();
-    APPS
-      .filter(x => (x.name + " " + x.desc).toLowerCase().includes(q))
-      .forEach(x => {
-        const el = document.createElement("div");
-        el.className = "item";
-        el.innerHTML = `<b>${x.name}</b><small>${x.desc}</small>`;
-        el.addEventListener("click", () => {
-          location.hash = "#p=" + encodeURIComponent(x.key);
-          $("viewDetail").dataset.from = "apps";
-        });
-        wrap.appendChild(el);
-      });
-
-    if(!wrap.children.length){
-      wrap.innerHTML = `<div class="item" style="opacity:.8;cursor:default">
-        <b>Tidak ditemukan</b><small>Coba kata lain.</small></div>`;
-    }
-  }
-
-  function renderSmm(filter=""){
-    const wrap = $("smmItems");
-    wrap.innerHTML = "";
-    const q = filter.trim().toLowerCase();
-    SMM
-      .filter(x => (x.name + " " + x.desc).toLowerCase().includes(q))
-      .forEach(x => {
-        const el = document.createElement("div");
-        el.className = "item";
-        el.innerHTML = `<b>${x.name}</b><small>${x.desc}</small>`;
-        el.addEventListener("click", () => {
-          // kalau SMM nanti mau ada detail sendiri, bisa buat data lengkap seperti APPS
-          // untuk sekarang: arahkan WA tanya dulu
-          const msg = `Halo Endzyless Store, saya mau tanya ${x.name}.`;
-          window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,"_blank");
-        });
-        wrap.appendChild(el);
-      });
-
-    if(!wrap.children.length){
-      wrap.innerHTML = `<div class="item" style="opacity:.8;cursor:default">
-        <b>Belum ada</b><small>Nanti kita isi paketnya ya.</small></div>`;
-    }
-  }
-
-  $("qApps").addEventListener("input", (e) => renderApps(e.target.value));
-  $("qSmm").addEventListener("input", (e) => renderSmm(e.target.value));
-
-  // ====== Detail product ======
-  let current = null;
-
-  function openDetailByKey(keyRaw){
-    const key = decodeURIComponent(keyRaw || "");
-    const p = APPS.find(x => x.key === key);
-    if(!p){
-      location.hash = "#apps";
-      return;
-    }
-    current = p;
-
-    // switch view
-    setView("detail", p.name, `Home / Aplikasi Premium / ${stripEmoji(p.name)}`, true);
-
-    // fill UI
-    $("dTitle").textContent = p.name;
-    $("dDesc").textContent = p.desc;
-    $("dBadge").textContent = p.badge || "Ready";
-
-    const chipsWrap = $("dChips");
-    chipsWrap.innerHTML = "";
-    (p.chips || []).forEach(c => {
-      const x = document.createElement("div");
-      x.className = "chip";
-      x.textContent = c;
-      chipsWrap.appendChild(x);
-    });
-
-    // packages
-    const sel = $("paket");
-    sel.innerHTML = "";
-    p.packages.forEach(([label, price]) => {
-      const opt = document.createElement("option");
-      opt.value = label + "|" + price;
-      opt.textContent = `${label} — ${rupiah(price)}`;
-      sel.appendChild(opt);
-    });
-
-    // addon
-    const addonPrice = Number(p.addonPrice || 0);
-    $("addon").checked = false;
-    $("addonText").textContent = `${p.addonLabel || "Add-on"} +${rupiah(addonPrice)}`;
-
-    function update(){
-      const [pkgName, pkgPriceStr] = sel.value.split("|");
-      let total = parseInt(pkgPriceStr, 10);
-      if($("addon").checked) total += addonPrice;
-
-      $("total").textContent = rupiah(total);
-
-      const addonTxt = $("addon").checked && addonPrice>0 ? ` + ${p.addonLabel}` : "";
-      const msgBuy = `Halo Endzyless Store, saya mau order ${stripEmoji(p.name)} (${pkgName}${addonTxt}). Total ${rupiah(total)}.`;
-      const msgAsk = `Halo kak, saya mau tanya soal ${stripEmoji(p.name)}.`;
-
-      $("tanya").href = `https://wa.me/${WA}?text=${encodeURIComponent(msgAsk)}`;
-      $("beli").href  = `https://wa.me/${WA}?text=${encodeURIComponent(msgBuy)}`;
-    }
-
-    sel.onchange = update;
-    $("addon").onchange = update;
-    update();
-  }
-
-  function stripEmoji(s){
-    // remove emoji-ish chars for crumb readability
-    return (s || "").replace(/[^\p{L}\p{N}\p{P}\p{Z}]/gu,"").trim() || s;
-  }
-
-  // initial render
-  renderApps();
-  renderSmm();
-
-  window.addEventListener("hashchange", route);
-  route();
-</script>
-</body>
-</html>    <div class="brand">
-      <div class="logoWrap" aria-label="Logo Endzyless Store">
-        <!-- Upload file logo kamu ke repo: logo.png -->
-        <img class="logoImg" src="./logo.png" alt="Endzyless Store">
-      </div>
-      <div>
+    <div class="brand">
+      <!-- Pastikan nama file logonya sama: Logo.png atau logo.png -->
+      <img src="Logo.png" alt="Endzyless Logo" onerror="this.style.display='none'">
+      <div style="min-width:0">
         <h1>Endzyless Store</h1>
         <p>Semua kebutuhan digitalmu ada disini!</p>
       </div>
     </div>
-    <a class="chip" href="#produk">Produk</a>
+    <a class="chip" href="app-prem.html">Mulai</a>
   </header>
 
   <main class="wrap">
     <section class="hero">
-      <h2>Belanja produk digital tanpa ribet</h2>
-      <p>Pilih paket → klik beli.</p>
+      <h2>Menu Utama</h2>
+      <p>Pilih kategori → pilih aplikasi → pilih produk → detail transaksi → QRIS.</p>
     </section>
 
-    <section id="produk" class="card">
-      <div class="row">
-        <div>
-          <p class="title">🎨 Canva Pro</p>
-          <p class="desc">Akses Canva Pro untuk desain cepat, rapi, dan profesional — cocok untuk semua kebutuhan visual.</p>
+    <div class="sectionTitle">Kategori</div>
+    <div class="grid">
+      <a class="card" href="app-prem.html">
+        <div class="icon">★</div>
+        <div class="meta">
+          <p class="t">Aplikasi Premium</p>
+          <p class="s">Canva, Capcut, Netflix, dll</p>
         </div>
-        <div class="badge">Full Garansi</div>
-      </div>
+      </a>
 
-      <div class="features">
-        <div class="feat">Akses fitur pro tanpa batas</div>
-        <div class="feat">Ribuan template siap pakai</div>
-        <div class="feat">Elemen, font, aset eksklusif</div>
-        <div class="feat">Konten • Presentasi • Branding</div>
-      </div>
+      <a class="card" href="#" onclick="alert('Nanti kita buat halaman Sosial Media Marketing ya!')">
+        <div class="icon">SM</div>
+        <div class="meta">
+          <p class="t">Sosial Media Marketing</p>
+          <p class="s">Jasa & kebutuhan promosi</p>
+        </div>
+      </a>
+    </div>
 
-      <label class="label">Pilih paket</label>
-      <select id="paket" class="select">
-        <option value="1 Bulan|5000">1 Bulan — Rp5.000</option>
-        <option value="2 Bulan|7000">2 Bulan — Rp7.000</option>
-        <option value="3 Bulan|9000">3 Bulan — Rp9.000</option>
-        <option value="4 Bulan|11000">4 Bulan — Rp11.000</option>
-        <option value="5 Bulan|13000">5 Bulan — Rp13.000</option>
-        <option value="6 Bulan|15000">6 Bulan — Rp15.000</option>
-        <option value="1 Tahun|28000">1 Tahun — Rp28.000</option>
-      </select>
-
-      <label class="label">Add-on</label>
-      <label class="check">
-        <input id="designer" type="checkbox"/>
-        <span>Designer +Rp1.000</span>
-      </label>
-
-      <div class="total">
-        <span>Total</span>
-        <span id="total" class="price">Rp5.000</span>
-      </div>
-
-      <div class="actions">
-        <a id="tanya" class="btn" target="_blank" rel="noreferrer">Tanya</a>
-        <a id="beli" class="btn primary" target="_blank" rel="noreferrer">Beli</a>
-      </div>
-
-      <div class="note">Catatan: produk digital. Detail akses dikirim setelah pembayaran terkonfirmasi.</div>
-    </section>
-
-    <div class="footer">© <span id="year"></span> Endzyless Store</div>
+    <div class="foot">© <span id="y"></span> Endzyless Store</div>
   </main>
 
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  // WA kamu (udah kamu kasih)
-  const WA = "6285141179499";
-
-  const paket = document.getElementById("paket");
-  const designer = document.getElementById("designer");
-  const totalEl = document.getElementById("total");
-  const btnTanya = document.getElementById("tanya");
-  const btnBeli = document.getElementById("beli");
-
-  const rupiah = (n) => "Rp" + new Intl.NumberFormat("id-ID").format(n);
-
-  function update() {
-    const [namaPaket, hargaStr] = paket.value.split("|");
-    let harga = parseInt(hargaStr, 10);
-    if (designer.checked) harga += 1000;
-
-    totalEl.textContent = rupiah(harga);
-
-    const addonText = designer.checked ? " + Designer" : "";
-    const msg = `Halo Endzyless Store, saya mau order Canva Pro (${namaPaket}${addonText}). Total ${rupiah(harga)}.`;
-
-    btnTanya.href = `https://wa.me/${6285141179499}?text=${encodeURIComponent("Halo kak, saya mau tanya soal Canva Pro.")}`;
-    btnBeli.href  = `https://wa.me/${6285141179499}?text=${encodeURIComponent(msg)}`;
-  }
-
-  paket.addEventListener("change", update);
-  designer.addEventListener("change", update);
-  update();
-</script>
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
