@@ -5,51 +5,151 @@
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Endzyless Store</title>
   <style>
-    :root{--bg:#0b0c10;--card:#12141b;--text:#e8eaf0;--muted:#a9afc3;--line:#212534}
+    :root{
+      --bg:#0b0c10;
+      --card:#12141b;
+      --text:#e8eaf0;
+      --muted:#a9afc3;
+      --line:#212534;
+
+      /* BRAND COLORS (sesuai warna utama kamu) */
+      --brand1:#2f7df6;  /* biru */
+      --brand2:#6b4cf6;  /* ungu */
+      --brandGrad: linear-gradient(135deg, var(--brand1), var(--brand2));
+      --brandGlow: 0 0 0 1px rgba(47,125,246,.25), 0 16px 40px rgba(107,76,246,.18);
+    }
+
     *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text)}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      background: radial-gradient(1200px 700px at 20% -10%, rgba(47,125,246,.22), transparent 55%),
+                  radial-gradient(900px 600px at 90% 0%, rgba(107,76,246,.18), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+    }
     a{text-decoration:none;color:inherit}
-    .top{position:sticky;top:0;background:rgba(11,12,16,.8);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
-      padding:14px 16px;display:flex;align-items:center;justify-content:space-between}
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#6d5cff,#00d4ff);
-      display:grid;place-items:center;font-weight:900;color:#071018}
-    h1{margin:0;font-size:18px}
-    .brand p{margin:2px 0 0;color:var(--muted);font-size:12px}
-    .chip{padding:10px 12px;border:1px solid var(--line);border-radius:999px;font-size:12px}
+    .top{
+      position:sticky; top:0;
+      background:rgba(11,12,16,.75);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+      padding:14px 16px;
+      display:flex; align-items:center; justify-content:space-between;
+      z-index:20;
+    }
+
+    .brand{display:flex;gap:12px;align-items:center;min-width:0}
+    .logoWrap{
+      width:46px;height:46px;border-radius:16px;
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      display:grid; place-items:center;
+      overflow:hidden;
+      box-shadow: var(--brandGlow);
+      flex:0 0 auto;
+    }
+    .logoImg{
+      width:100%; height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    h1{margin:0;font-size:18px;line-height:1.1}
+    .brand p{margin:2px 0 0;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+    .chip{
+      padding:10px 12px;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:999px;
+      font-size:12px;
+      background:rgba(255,255,255,.03);
+    }
+    .chip:hover{border-color:rgba(47,125,246,.45)}
+
     .wrap{max-width:920px;margin:0 auto;padding:18px 16px 46px}
+
     .hero{padding:14px 0 10px}
     .hero h2{margin:0 0 8px;font-size:22px}
     .hero p{margin:0;color:var(--muted);line-height:1.45}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px;
+      padding:16px;
+      box-shadow: 0 18px 50px rgba(0,0,0,.35);
+    }
     .row{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
     .title{margin:0 0 6px;font-size:16px;font-weight:900}
     .desc{margin:0;color:var(--muted);font-size:13px;line-height:1.4}
-    .badge{font-size:12px;font-weight:900;padding:8px 10px;border-radius:999px;
-      background:rgba(109,92,255,.12);border:1px solid rgba(109,92,255,.35);color:#c9c4ff;white-space:nowrap}
+
+    .badge{
+      font-size:12px;font-weight:900;
+      padding:8px 10px;border-radius:999px;
+      background:rgba(47,125,246,.10);
+      border:1px solid rgba(47,125,246,.35);
+      color:#cfe1ff;
+      white-space:nowrap;
+    }
+
     .features{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 14px}
-    .feat{font-size:12px;color:var(--muted);padding:8px 10px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.02)}
+    .feat{
+      font-size:12px;color:var(--muted);
+      padding:8px 10px;border:1px solid rgba(255,255,255,.08);
+      border-radius:999px;background:rgba(255,255,255,.02)
+    }
+
     .label{display:block;font-size:12px;color:var(--muted);margin:10px 0 6px}
-    .select{width:100%;padding:12px 12px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.02);color:var(--text);outline:none}
+    .select{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.02);
+      color:var(--text);
+      outline:none
+    }
+    .select:focus{border-color:rgba(47,125,246,.55); box-shadow:0 0 0 3px rgba(47,125,246,.12)}
+
     .check{display:flex;gap:10px;align-items:center;color:var(--text);font-size:13px}
     .check input{transform:scale(1.2)}
+
     .total{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
     .price{font-weight:900}
+
     .actions{display:flex;gap:10px;margin-top:12px}
-    .btn{flex:1;display:flex;justify-content:center;align-items:center;padding:12px 12px;border-radius:14px;
-      border:1px solid var(--line);font-weight:900}
-    .primary{border:0;background:linear-gradient(135deg,#6d5cff,#00d4ff);color:#071018}
+    .btn{
+      flex:1;
+      display:flex;justify-content:center;align-items:center;
+      padding:12px 12px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      font-weight:900;
+      background:rgba(255,255,255,.02);
+    }
+    .btn:hover{border-color:rgba(255,255,255,.22)}
+    .primary{
+      border:0;
+      background: var(--brandGrad);
+      color:#071018;
+      box-shadow: var(--brandGlow);
+    }
+    .primary:hover{filter:brightness(1.03)}
+
     .note{margin-top:12px;color:var(--muted);font-size:12px}
-    .footer{margin-top:20px;border-top:1px solid var(--line);padding-top:14px;color:var(--muted);font-size:12px;text-align:center}
+    .footer{margin-top:20px;border-top:1px solid rgba(255,255,255,.08);padding-top:14px;color:var(--muted);font-size:12px;text-align:center}
   </style>
 </head>
 <body>
   <header class="top">
     <div class="brand">
-      <div class="logo">E</div>
+      <div class="logoWrap" aria-label="Logo Endzyless Store">
+        <!-- Upload file logo kamu ke repo: logo.png -->
+        <img class="logoImg" src="logo.png" alt="Endzyless Store Logo">
+      </div>
       <div>
         <h1>Endzyless Store</h1>
-        <p>Produk digital • cepat • rapi</p>
+        <p>Produk digital • Cepat • Aman • Terpercaya</p>
       </div>
     </div>
     <a class="chip" href="#produk">Produk</a>
@@ -58,7 +158,7 @@
   <main class="wrap">
     <section class="hero">
       <h2>Belanja produk digital tanpa ribet</h2>
-      <p>Pilih paket → klik beli. (Nanti tombolnya bisa diganti jadi bayar QRIS otomatis.)</p>
+      <p>Pilih paket → klik beli.</p>
     </section>
 
     <section id="produk" class="card">
@@ -113,7 +213,9 @@
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
 
-  const WA = "6281234567890"; // <-- GANTI INI
+  // WA kamu (udah kamu kasih)
+  const WA = "6285141179499";
+
   const paket = document.getElementById("paket");
   const designer = document.getElementById("designer");
   const totalEl = document.getElementById("total");
