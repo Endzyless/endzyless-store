@@ -3,514 +3,258 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Canva • Endzyless Store</title>
+  <title>App Prem • Canva</title>
   <style>
     :root{
-      --bg:#0b0c10;--card:#12141b;--text:#e8eaf0;--muted:#a9afc3;--line:#212534;
-      --g1:#2f7dff;--g2:#7c3aed;
-      --panel:#0f121a;
+      --brandTop:#397ed9;
+      --brandMid:#014ce7;
+      --brandBot:#5a37e7;
+
+      --ink:#eaf0ff;
+      --muted:rgba(234,240,255,.72);
+      --line:rgba(255,255,255,.10);
+      --card:rgba(0,0,0,.28);
+      --card2:rgba(0,0,0,.18);
+      --shadow:0 12px 40px rgba(0,0,0,.35);
+      --r:18px;
     }
+
     *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#0b0c10,#0a1020);color:var(--text)}
-    a{text-decoration:none;color:inherit}
-    button{font-family:inherit}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      color:var(--ink);
+      background: linear-gradient(
+        to bottom,
+        var(--brandTop) 0%,
+        var(--brandMid) 55%,
+        var(--brandBot) 100%
+      );
+      min-height:100vh;
+    }
 
-    /* TOP BAR */
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:860px;margin:0 auto;padding:14px 14px 28px}
+
+    /* top bar */
     .top{
-      position:sticky;top:0;z-index:10;
-      background:rgba(11,12,16,.78);backdrop-filter:blur(10px);
+      position:sticky;top:0;z-index:20;
+      padding:12px 12px;
+      background:rgba(0,0,0,.32);
+      backdrop-filter:blur(12px);
       border-bottom:1px solid var(--line);
-      padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px
+      border-radius: 0 0 18px 18px;
     }
-    .left{display:flex;align-items:center;gap:10px;min-width:0}
+    .topRow{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .left{
+      display:flex;align-items:center;gap:10px;min-width:0;
+    }
     .back{
-      width:38px;height:38px;border-radius:12px;border:1px solid var(--line);
-      display:grid;place-items:center;background:rgba(255,255,255,.02)
+      width:36px;height:36px;border-radius:12px;
+      display:grid;place-items:center;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      box-shadow:0 10px 24px rgba(0,0,0,.25);
+      user-select:none;
     }
-    .titleWrap{min-width:0}
-    .titleWrap h1{margin:0;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .titleWrap p{margin:2px 0 0;color:var(--muted);font-size:12px}
-    .chip{
-      padding:10px 12px;border:1px solid var(--line);border-radius:999px;
-      font-size:12px;background:rgba(255,255,255,.02);white-space:nowrap
+    .titleBox{min-width:0}
+    .title{margin:0;font-size:14px;font-weight:900;line-height:1.1}
+    .sub{margin:2px 0 0;font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+    .pill{
+      padding:9px 12px;border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      font-size:12px;font-weight:800;
+      white-space:nowrap;
     }
 
-    /* FILTER BAR */
-    .wrap{max-width:920px;margin:0 auto;padding:14px 14px 80px}
-    .filter{
-      background:rgba(255,255,255,.03);
+    /* panel */
+    .panel{
+      margin-top:12px;
+      background:rgba(0,0,0,.28);
       border:1px solid var(--line);
-      border-radius:16px;padding:12px;display:flex;gap:10px;align-items:center
+      border-radius:22px;
+      padding:12px;
+      box-shadow:var(--shadow);
     }
-    .sel, .inp{
+
+    /* controls */
+    .controls{
+      display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+    }
+    .select, .search{
       border:1px solid var(--line);
-      background:rgba(255,255,255,.02);
-      color:var(--text);
-      border-radius:12px;
-      padding:10px 10px;
+      background:rgba(255,255,255,.06);
+      color:var(--ink);
+      border-radius:14px;
+      padding:11px 12px;
       outline:none;
-      font-size:13px;
     }
-    .sel{min-width:130px}
-    .inp{flex:1}
+    .select{font-weight:800}
+    .search{flex:1;min-width:180px}
+    .search::placeholder{color:rgba(234,240,255,.55)}
     .iconBtn{
-      width:42px;height:42px;border-radius:12px;border:1px solid var(--line);
-      background:rgba(255,255,255,.02);display:grid;place-items:center;cursor:pointer
+      width:44px;height:44px;border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.06);
+      display:grid;place-items:center;
+      font-size:18px;
     }
 
-    /* LIST */
-    .list{margin-top:12px;display:flex;flex-direction:column;gap:10px}
+    /* list */
+    .list{margin-top:12px;display:grid;gap:10px}
     .item{
-      background:rgba(18,20,27,.72);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
       border:1px solid var(--line);
       border-radius:16px;
       padding:12px;
       display:flex;gap:12px;align-items:center;
-      box-shadow:0 18px 55px rgba(0,0,0,.32);
-      cursor:pointer;
+      box-shadow:0 12px 26px rgba(0,0,0,.25);
+      transition:transform .12s ease, opacity .12s ease;
     }
-    .thumb{
-      width:46px;height:46px;border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
+    .item:active{transform:scale(.99)}
+    .avatar{
+      width:44px;height:44px;border-radius:14px;
+      background:linear-gradient(135deg, rgba(57,126,217,.9), rgba(90,55,231,.85));
+      border:1px solid rgba(255,255,255,.14);
       display:grid;place-items:center;
-      background:linear-gradient(135deg,#2f7dff,#7c3aed);
-      font-weight:900;color:#071018;
-      overflow:hidden;
+      font-weight:1000;
     }
-    .thumb img{width:100%;height:100%;object-fit:cover}
     .meta{min-width:0;flex:1}
-    .meta .name{margin:0;font-weight:900;font-size:14px}
-    .meta .sub{margin:3px 0 0;color:var(--muted);font-size:12px}
-    .price{font-weight:900;color:#9fd0ff;white-space:nowrap}
+    .name{margin:0;font-weight:1000;font-size:14px}
+    .desc{margin:3px 0 0;font-size:12px;color:var(--muted)}
+    .price{
+      font-weight:1000;
+      color:#d7e6ff;
+      opacity:.95;
+      white-space:nowrap;
+    }
 
+    /* footer */
     .foot{
-      margin-top:14px;color:var(--muted);font-size:12px;text-align:center
-    }
-
-    /* MODAL */
-    .overlay{
-      position:fixed;inset:0;
-      background:rgba(0,0,0,.55);
-      display:none;
-      align-items:flex-end;
-      z-index:50;
-    }
-    .sheet{
-      width:100%;
-      max-width:920px;
-      margin:0 auto;
-      background:rgba(15,18,26,.94);
-      border:1px solid var(--line);
-      border-bottom:0;
-      border-radius:20px 20px 0 0;
-      box-shadow:0 -30px 80px rgba(0,0,0,.5);
-      overflow:hidden;
-    }
-    .sheetHead{
-      background:linear-gradient(135deg,var(--g1),var(--g2));
-      padding:14px 14px 18px;
-      position:relative;
-    }
-    .sheetHead .cap{
+      margin-top:14px;
       text-align:center;
-      font-weight:900;
-      letter-spacing:.3px;
+      color:rgba(234,240,255,.70);
+      font-size:12px;
     }
-    .closeX{
-      position:absolute;right:12px;top:10px;
-      width:36px;height:36px;border-radius:12px;
-      border:1px solid rgba(255,255,255,.25);
-      background:rgba(255,255,255,.08);
-      color:#fff;cursor:pointer;
-    }
-    .sheetBody{padding:14px}
-    .prodTitle{margin:2px 0 2px;text-align:center;font-weight:1000;font-size:16px}
-    .prodPrice{margin:0 0 12px;text-align:center;font-weight:1000;color:#b9d4ff;font-size:18px}
 
-    .box{
-      border:1px dashed rgba(47,125,255,.55);
-      background:rgba(47,125,255,.06);
-      border-radius:14px;
-      padding:12px;
-      color:#dbe7ff;
-      font-size:13px;
-      line-height:1.4;
-    }
-    .box b{display:block;margin-bottom:6px;color:#b9d4ff}
-
-    .row2{
-      display:flex;justify-content:space-between;align-items:center;
-      margin-top:12px;padding-top:10px;border-top:1px solid var(--line)
-    }
-    .row2 span{color:var(--muted);font-size:13px}
-    .row2 strong{font-size:13px}
-
-    /* designer toggle */
-    .toggleWrap{
-      margin-top:12px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.02);
-      border-radius:14px;
-      padding:12px;
-      display:flex;align-items:center;justify-content:space-between;gap:12px
-    }
-    .toggleWrap .t1{font-weight:900}
-    .toggleWrap .t2{color:var(--muted);font-size:12px;margin-top:2px}
-    .switch{position:relative;width:52px;height:30px;flex:0 0 auto}
-    .switch input{display:none}
-    .track{
-      position:absolute;inset:0;border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.04);
-      transition:.2s;
-    }
-    .dot{
-      position:absolute;top:4px;left:4px;
-      width:22px;height:22px;border-radius:999px;
-      background:rgba(255,255,255,.85);
-      transition:.2s;
-    }
-    .switch input:checked + .track{
-      background:linear-gradient(135deg,var(--g1),var(--g2));
-      border:0;
-    }
-    .switch input:checked + .track .dot{left:26px;background:#071018}
-
-    .actions{
-      margin-top:14px;display:flex;gap:10px
-    }
-    .btn{
-      flex:1;padding:12px;border-radius:14px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.02);
-      color:var(--text);
-      font-weight:900;
-      text-align:center;
-      cursor:pointer;
-    }
-    .btn.primary{
-      border:0;background:linear-gradient(135deg,var(--g1),var(--g2));
-      color:#071018;
-    }
-    .note{
-      margin-top:10px;color:var(--muted);font-size:12px;text-align:center
+    /* hide removed section if old HTML still has it */
+    .fastProc, .checkoutBar, .bottomBar, .stickyBar, .orderBox, .detailNextNote {
+      display:none !important;
     }
   </style>
 </head>
+
 <body>
-
-<header class="top">
-  <div class="left">
-    <a class="back" href="app-prem.html" aria-label="Kembali">←</a>
-    <div class="titleWrap">
-      <h1>App Prem</h1>
-      <p>Canva</p>
-    </div>
-  </div>
-  <div class="chip" id="sortLabel">Termurah</div>
-</header>
-
-<main class="wrap">
-  <div class="filter">
-    <select class="sel" id="sort">
-      <option value="cheap" selected>Termurah</option>
-      <option value="expensive">Termahal</option>
-    </select>
-    <input class="inp" id="q" placeholder="Cari produk… (contoh: member, owner, 1 bulan)"/>
-    <button class="iconBtn" id="reset" title="Reset">⟲</button>
-  </div>
-
-  <section class="list" id="list"></section>
-
-  <div class="foot">© <span id="y"></span> Endzyless Store</div>
-</main>
-
-<!-- MODAL -->
-<div class="overlay" id="overlay">
-  <div class="sheet" role="dialog" aria-modal="true" aria-label="Detail Produk">
-    <div class="sheetHead">
-      <div class="cap">Detail Produk</div>
-      <button class="closeX" id="close">✕</button>
-    </div>
-    <div class="sheetBody">
-      <div class="prodTitle" id="mTitle">-</div>
-      <div class="prodPrice" id="mPrice">Rp0</div>
-
-      <div class="box" id="mDescBox">
-        <b>Deskripsi Produk:</b>
-        <div id="mDesc">-</div>
-      </div>
-
-      <!-- khusus Canva: add-on Designer -->
-      <div class="toggleWrap" id="designerWrap" style="display:none">
-        <div>
-          <div class="t1">Tambah Designer</div>
-          <div class="t2">+Rp1.000 (opsional, khusus Canva)</div>
+  <header class="top">
+    <div class="topRow">
+      <div class="left">
+        <a class="back" href="app-prem.html" aria-label="Kembali">←</a>
+        <div class="titleBox">
+          <p class="title">App Prem</p>
+          <p class="sub">Canva</p>
         </div>
-        <label class="switch" aria-label="Toggle Designer">
-          <input type="checkbox" id="designerToggle">
-          <div class="track"><div class="dot"></div></div>
-        </label>
       </div>
 
-      <div class="row2">
-        <span>Total Pembayaran</span>
-        <strong id="mTotal">Rp0</strong>
-      </div>
-
-      <div class="actions">
-        <a class="btn" id="btnTanya" target="_blank" rel="noreferrer">Kembali / Tanya</a>
-        <a class="btn primary" id="btnLanjut" target="_blank" rel="noreferrer">Lanjutkan</a>
-      </div>
-
-      <div class="note">UI dulu. Pembayaran otomatis (Midtrans/QRIS) nanti nyambung di tombol “Lanjutkan”.</div>
+      <span class="pill" id="sortLabel">Termurah</span>
     </div>
-  </div>
-</div>
+  </header>
 
-<script>
-  // ganti jika perlu
-  const WA = "6285141179499";
+  <main class="wrap">
+    <section class="panel">
+      <div class="controls">
+        <select id="sort" class="select" aria-label="Urutkan">
+          <option value="cheap" selected>Termurah</option>
+          <option value="exp">Termahal</option>
+          <option value="name">Nama A-Z</option>
+        </select>
 
-  document.getElementById("y").textContent = new Date().getFullYear();
+        <input id="q" class="search" placeholder="Cari produk... (contoh: member, owner, 1 bulan)" />
 
-  const rupiah = (n) => "Rp" + new Intl.NumberFormat("id-ID").format(n);
+        <button class="iconBtn" id="clear" title="Hapus pencarian" aria-label="Hapus pencarian">✕</button>
+      </div>
 
-  // DATA PRODUK CANVA (silakan edit harga/stok/nama)
-  const products = [
-    {
-      id:"cm1",
-      name:"Canva Member 1 Bulan",
-      stock:371,
-      price:5000,
-      desc:"VIA INVITE LINK. 1x beli = 1 customer. Garansi sesuai ketentuan admin.",
-      brand:"canva"
-    },
-    {
-      id:"cmy",
-      name:"Canva Member 1 Tahun",
-      stock:378,
-      price:28000,
-      desc:"VIA INVITE LINK. 1x beli = 1 customer. Garansi sesuai ketentuan admin.",
-      brand:"canva"
-    },
-    {
-      id:"co1",
-      name:"Canva Owner 1 Bulan",
-      stock:0,
-      price:3500,
-      desc:"Ketersediaan tergantung stok. Garansi sesuai ketentuan admin.",
-      brand:"canva"
-    },
-    {
-      id:"coy",
-      name:"Canva Owner 1 Tahun",
-      stock:12,
-      price:25000,
-      desc:"Ketersediaan tergantung stok. Garansi sesuai ketentuan admin.",
-      brand:"canva"
+      <div class="list" id="list"></div>
+
+      <div class="foot">© <span id="y"></span> Endzyless Store</div>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+
+    // Data produk (ubah sesuai kebutuhan)
+    const PRODUCTS = [
+      { id:"canva-owner-1b",  name:"Canva Owner 1 Bulan",  stock:0,   price:3500 },
+      { id:"canva-member-1b", name:"Canva Member 1 Bulan", stock:371, price:5000 },
+      { id:"canva-owner-1t",  name:"Canva Owner 1 Tahun",  stock:12,  price:25000 },
+      { id:"canva-member-1t", name:"Canva Member 1 Tahun", stock:378, price:28000 },
+    ];
+
+    const rupiah = (n) => "Rp" + new Intl.NumberFormat("id-ID").format(n);
+
+    const listEl = document.getElementById("list");
+    const qEl = document.getElementById("q");
+    const sortEl = document.getElementById("sort");
+    const sortLabel = document.getElementById("sortLabel");
+    const clearBtn = document.getElementById("clear");
+
+    function render() {
+      const q = (qEl.value || "").trim().toLowerCase();
+      const mode = sortEl.value;
+
+      sortLabel.textContent =
+        mode === "cheap" ? "Termurah" :
+        mode === "exp"   ? "Termahal" : "Nama";
+
+      let items = PRODUCTS
+        .filter(p => {
+          if (!q) return true;
+          const blob = `${p.name} ${p.stock} ${p.price}`.toLowerCase();
+          return blob.includes(q);
+        })
+        .slice();
+
+      items.sort((a,b) => {
+        if (mode === "cheap") return a.price - b.price;
+        if (mode === "exp")   return b.price - a.price;
+        return a.name.localeCompare(b.name);
+      });
+
+      listEl.innerHTML = items.map(p => `
+        <a class="item" href="javascript:void(0)" onclick="openDetail('${p.id}')">
+          <div class="avatar">C</div>
+          <div class="meta">
+            <p class="name">${p.name}</p>
+            <p class="desc">${p.name} • Stok ${p.stock}</p>
+          </div>
+          <div class="price">${rupiah(p.price)}</div>
+        </a>
+      `).join("");
+
+      if (items.length === 0) {
+        listEl.innerHTML = `
+          <div class="item" style="justify-content:center;opacity:.85">
+            Produk tidak ditemukan.
+          </div>
+        `;
+      }
     }
-  ];
 
-  const listEl = document.getElementById("list");
-  const sortEl = document.getElementById("sort");
-  const qEl = document.getElementById("q");
-  const resetEl = document.getElementById("reset");
-  const sortLabel = document.getElementById("sortLabel");
+    // Untuk sekarang: klik item belum buka detail (nanti kita bikin modal detail produk)
+    window.openDetail = (id) => {
+      // sementara hanya contoh
+      const p = PRODUCTS.find(x => x.id === id);
+      if (!p) return;
+      alert(`Detail Produk\\n\\n${p.name}\\nHarga: ${rupiah(p.price)}\\nStok: ${p.stock}\\n\\n(Nanti ini diganti jadi modal detail produk + opsi Designer +Rp1.000)`);
+    };
 
-  // modal elements
-  const overlay = document.getElementById("overlay");
-  const closeBtn = document.getElementById("close");
-  const mTitle = document.getElementById("mTitle");
-  const mPrice = document.getElementById("mPrice");
-  const mDesc = document.getElementById("mDesc");
-  const mTotal = document.getElementById("mTotal");
-  const designerWrap = document.getElementById("designerWrap");
-  const designerToggle = document.getElementById("designerToggle");
-  const btnTanya = document.getElementById("btnTanya");
-  const btnLanjut = document.getElementById("btnLanjut");
+    clearBtn.addEventListener("click", () => { qEl.value=""; render(); });
+    qEl.addEventListener("input", render);
+    sortEl.addEventListener("change", render);
 
-  let activeProduct = null;
-
-  function getFiltered(){
-    const q = (qEl.value || "").toLowerCase().trim();
-    let arr = products.filter(p=>{
-      const hay = (p.name + " " + (p.stock??"") ).toLowerCase();
-      return q ? hay.includes(q) : true;
-    });
-
-    if(sortEl.value === "cheap"){
-      arr.sort((a,b)=>a.price-b.price);
-      sortLabel.textContent = "Termurah";
-    } else {
-      arr.sort((a,b)=>b.price-a.price);
-      sortLabel.textContent = "Termahal";
-    }
-    return arr;
-  }
-
-  function render(){
-    const arr = getFiltered();
-    listEl.innerHTML = "";
-    arr.forEach(p=>{
-      const item = document.createElement("div");
-      item.className = "item";
-      item.innerHTML = `
-        <div class="thumb"><span>C</span></div>
-        <div class="meta">
-          <p class="name">${p.name}</p>
-          <p class="sub">${p.name} • Stok ${p.stock}</p>
-        </div>
-        <div class="price">${rupiah(p.price)}</div>
-      `;
-      item.addEventListener("click", ()=>openDetail(p));
-      listEl.appendChild(item);
-    });
-  }
-
-  function openDetail(p){
-    activeProduct = p;
-
-    // reset toggle setiap buka
-    designerToggle.checked = false;
-
-    mTitle.textContent = p.name;
-    mPrice.textContent = rupiah(p.price);
-    mDesc.textContent = p.desc;
-
-    // Canva punya add-on Designer
-    designerWrap.style.display = (p.brand === "canva") ? "flex" : "none";
-
-    updateTotal();
-
-    // Tombol: Kembali/Tanya (di sini kita bikin ke WA biar aman)
-    btnTanya.textContent = "Tanya";
-    btnTanya.href = `https://wa.me/${WA}?text=${encodeURIComponent("Halo kak, saya mau tanya produk Canva.")}`;
-
-    overlay.style.display = "flex";
-    document.body.style.overflow = "hidden";
-  }
-
-  function closeDetail(){
-    overlay.style.display = "none";
-    document.body.style.overflow = "";
-  }
-
-  function updateTotal(){
-    if(!activeProduct) return;
-    let total = activeProduct.price;
-    let addonText = "";
-    if(activeProduct.brand === "canva" && designerToggle.checked){
-      total += 1000;
-      addonText = " + Designer";
-    }
-    mTotal.textContent = rupiah(total);
-
-    // Lanjutkan (sementara ke WA dulu, nanti diganti ke Midtrans)
-    const msg = `Halo Endzyless Store, saya mau order ${activeProduct.name}${addonText}. Total ${rupiah(total)}.`;
-    btnLanjut.href = `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
-  }
-
-  // events
-  sortEl.addEventListener("change", render);
-  qEl.addEventListener("input", render);
-  resetEl.addEventListener("click", ()=>{
-    sortEl.value = "cheap";
-    qEl.value = "";
     render();
-  });
-
-  closeBtn.addEventListener("click", closeDetail);
-  overlay.addEventListener("click", (e)=>{
-    if(e.target === overlay) closeDetail();
-  });
-
-  designerToggle.addEventListener("change", updateTotal);
-
-  render();
-</script>
-
-      <div class="line"></div>
-
-      <label class="label">Pilih paket</label>
-      <select class="select paket">
-        <option value="1 Bulan|5000">1 Bulan — Rp5.000</option>
-        <option value="3 Bulan|9000">3 Bulan — Rp9.000</option>
-        <option value="6 Bulan|15000">6 Bulan — Rp15.000</option>
-        <option value="1 Tahun|28000">1 Tahun — Rp28.000</option>
-      </select>
-
-      <label class="label">Add-on</label>
-      <label class="check">
-        <input class="designer" type="checkbox"/>
-        <span>Designer +Rp1.000 (opsional)</span>
-      </label>
-
-      <div class="total">
-        <span>Total</span>
-        <span class="price totalText">Rp5.000</span>
-      </div>
-
-      <div class="actions">
-        <a class="btn tanya" target="_blank" rel="noreferrer">Tanya</a>
-        <a class="btn primary beli">Lanjutkan</a>
-      </div>
-
-      <div class="note">Detail transaksi akan muncul di halaman berikutnya.</div>
-    </div>
-
-  </section>
-
-  <div class="foot">© <span id="y"></span> Endzyless Store</div>
-</main>
-
-<script>
-  document.getElementById("y").textContent = new Date().getFullYear();
-
-  const WA = "6285141179499"; // WA kamu
-  const rupiah = (n) => "Rp" + new Intl.NumberFormat("id-ID").format(n);
-
-  function buildDetailLink(params) {
-    const q = new URLSearchParams(params);
-    return "detail.html?" + q.toString();
-  }
-
-  function updateCard(card){
-    const paketEl = card.querySelector(".paket");
-    const desEl   = card.querySelector(".designer");
-    const totalEl = card.querySelector(".totalText");
-    const tanyaEl = card.querySelector(".tanya");
-    const beliEl  = card.querySelector(".beli");
-
-    const productBase = card.getAttribute("data-product") || "Canva";
-    const [durasi, hargaStr] = paketEl.value.split("|");
-    let harga = parseInt(hargaStr, 10);
-
-    const addDesigner = desEl.checked;
-    if(addDesigner) harga += 1000;
-
-    totalEl.textContent = rupiah(harga);
-
-    const addonText = addDesigner ? " + Designer" : "";
-    const namaProduk = `${productBase} (${durasi}${addonText})`;
-
-    // Tombol Tanya ke WA
-    tanyaEl.href = `https://wa.me/${WA}?text=${encodeURIComponent("Halo kak, saya mau tanya produk Canva.")}`;
-
-    // Tombol Lanjutkan ke detail.html (UI dulu)
-    beliEl.href = buildDetailLink({
-      produk: namaProduk,
-      harga: harga,
-      base: productBase,
-      durasi: durasi,
-      designer: addDesigner ? "1" : "0"
-    });
-  }
-
-  document.querySelectorAll(".card").forEach(card=>{
-    const paketEl = card.querySelector(".paket");
-    const desEl   = card.querySelector(".designer");
-    paketEl.addEventListener("change", ()=>updateCard(card));
-    desEl.addEventListener("change", ()=>updateCard(card));
-    updateCard(card);
-  });
+  </script>
+</body>
+</html>
