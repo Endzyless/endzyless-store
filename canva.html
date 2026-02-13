@@ -250,7 +250,7 @@
         </select>
 
         <input id="q" class="search" placeholder="Cari produk... (contoh: member, owner, 1 bulan)" />
-        
+
       </div>
 
       <div class="list" id="list"></div>
@@ -446,6 +446,7 @@ btnNext.addEventListener("click", () => {
     `qris.html?p=${encodeURIComponent(namaProduk)}&a=${encodeURIComponent(total)}`;
 });
 
+    clearBtn.addEventListener("click", () => { qEl.value=""; render(); });
     qEl.addEventListener("input", render);
     sortEl.addEventListener("change", render);
 
