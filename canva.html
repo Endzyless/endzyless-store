@@ -233,11 +233,10 @@
       <div class="left">
         <a class="back" href="app-prem.html" aria-label="Kembali">←</a>
         <div class="titleBox">
-          <p class="title">App Prem</p>
+          <p class="title">Aplikasi Premium</p>
           <p class="sub">Canva</p>
         </div>
       </div>
-      <span class="pill" id="sortLabel">Termurah</span>
     </div>
   </header>
 
@@ -251,8 +250,7 @@
         </select>
 
         <input id="q" class="search" placeholder="Cari produk... (contoh: member, owner, 1 bulan)" />
-
-        <button class="iconBtn" id="clear" title="Hapus pencarian" aria-label="Hapus pencarian">✕</button>
+        
       </div>
 
       <div class="list" id="list"></div>
@@ -448,7 +446,6 @@ btnNext.addEventListener("click", () => {
     `qris.html?p=${encodeURIComponent(namaProduk)}&a=${encodeURIComponent(total)}`;
 });
 
-    clearBtn.addEventListener("click", () => { qEl.value=""; render(); });
     qEl.addEventListener("input", render);
     sortEl.addEventListener("change", render);
 
