@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Endzyless Store</title>
+  <style>
+    :root{--bg:#0b0c10;--card:#12141b;--text:#e8eaf0;--muted:#a9afc3;--line:#212534}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--text)}
+    a{text-decoration:none;color:inherit}
+    .top{position:sticky;top:0;background:rgba(11,12,16,.8);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);
+      padding:14px 16px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#6d5cff,#00d4ff);
+      display:grid;place-items:center;font-weight:900;color:#071018}
+    h1{margin:0;font-size:18px}
+    .brand p{margin:2px 0 0;color:var(--muted);font-size:12px}
+    .chip{padding:10px 12px;border:1px solid var(--line);border-radius:999px;font-size:12px}
+    .wrap{max-width:920px;margin:0 auto;padding:18px 16px 46px}
+    .hero{padding:14px 0 10px}
+    .hero h2{margin:0 0 8px;font-size:22px}
+    .hero p{margin:0;color:var(--muted);line-height:1.45}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px}
+    .row{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+    .title{margin:0 0 6px;font-size:16px;font-weight:900}
+    .desc{margin:0;color:var(--muted);font-size:13px;line-height:1.4}
+    .badge{font-size:12px;font-weight:900;padding:8px 10px;border-radius:999px;
+      background:rgba(109,92,255,.12);border:1px solid rgba(109,92,255,.35);color:#c9c4ff;white-space:nowrap}
+    .features{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 14px}
+    .feat{font-size:12px;color:var(--muted);padding:8px 10px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.02)}
+    .label{display:block;font-size:12px;color:var(--muted);margin:10px 0 6px}
+    .select{width:100%;padding:12px 12px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.02);color:var(--text);outline:none}
+    .check{display:flex;gap:10px;align-items:center;color:var(--text);font-size:13px}
+    .check input{transform:scale(1.2)}
+    .total{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+    .price{font-weight:900}
+    .actions{display:flex;gap:10px;margin-top:12px}
+    .btn{flex:1;display:flex;justify-content:center;align-items:center;padding:12px 12px;border-radius:14px;
+      border:1px solid var(--line);font-weight:900}
+    .primary{border:0;background:linear-gradient(135deg,#6d5cff,#00d4ff);color:#071018}
+    .note{margin-top:12px;color:var(--muted);font-size:12px}
+    .footer{margin-top:20px;border-top:1px solid var(--line);padding-top:14px;color:var(--muted);font-size:12px;text-align:center}
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <div class="logo">E</div>
+      <div>
+        <h1>Endzyless Store</h1>
+        <p>Produk digital • cepat • rapi</p>
+      </div>
+    </div>
+    <a class="chip" href="#produk">Produk</a>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h2>Belanja produk digital tanpa ribet</h2>
+      <p>Pilih paket → klik beli. (Nanti tombolnya bisa diganti jadi bayar QRIS otomatis.)</p>
+    </section>
+
+    <section id="produk" class="card">
+      <div class="row">
+        <div>
+          <p class="title">🎨 Canva Pro</p>
+          <p class="desc">Akses Canva Pro untuk desain cepat, rapi, dan profesional — cocok untuk semua kebutuhan visual.</p>
+        </div>
+        <div class="badge">Full Garansi</div>
+      </div>
+
+      <div class="features">
+        <div class="feat">Akses fitur pro tanpa batas</div>
+        <div class="feat">Ribuan template siap pakai</div>
+        <div class="feat">Elemen, font, aset eksklusif</div>
+        <div class="feat">Konten • Presentasi • Branding</div>
+      </div>
+
+      <label class="label">Pilih paket</label>
+      <select id="paket" class="select">
+        <option value="1 Bulan|5000">1 Bulan — Rp5.000</option>
+        <option value="2 Bulan|7000">2 Bulan — Rp7.000</option>
+        <option value="3 Bulan|9000">3 Bulan — Rp9.000</option>
+        <option value="4 Bulan|11000">4 Bulan — Rp11.000</option>
+        <option value="5 Bulan|13000">5 Bulan — Rp13.000</option>
+        <option value="6 Bulan|15000">6 Bulan — Rp15.000</option>
+        <option value="1 Tahun|28000">1 Tahun — Rp28.000</option>
+      </select>
+
+      <label class="label">Add-on</label>
+      <label class="check">
+        <input id="designer" type="checkbox"/>
+        <span>Designer +Rp1.000</span>
+      </label>
+
+      <div class="total">
+        <span>Total</span>
+        <span id="total" class="price">Rp5.000</span>
+      </div>
+
+      <div class="actions">
+        <a id="tanya" class="btn" target="_blank" rel="noreferrer">Tanya</a>
+        <a id="beli" class="btn primary" target="_blank" rel="noreferrer">Beli</a>
+      </div>
+
+      <div class="note">Catatan: produk digital. Detail akses dikirim setelah pembayaran terkonfirmasi.</div>
+    </section>
+
+    <div class="footer">© <span id="year"></span> Endzyless Store</div>
+  </main>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  const WA = "6281234567890"; // <-- GANTI INI
+  const paket = document.getElementById("paket");
+  const designer = document.getElementById("designer");
+  const totalEl = document.getElementById("total");
+  const btnTanya = document.getElementById("tanya");
+  const btnBeli = document.getElementById("beli");
+
+  const rupiah = (n) => "Rp" + new Intl.NumberFormat("id-ID").format(n);
+
+  function update() {
+    const [namaPaket, hargaStr] = paket.value.split("|");
+    let harga = parseInt(hargaStr, 10);
+    if (designer.checked) harga += 1000;
+
+    totalEl.textContent = rupiah(harga);
+
+    const addonText = designer.checked ? " + Designer" : "";
+    const msg = `Halo Endzyless Store, saya mau order Canva Pro (${namaPaket}${addonText}). Total ${rupiah(harga)}.`;
+
+    btnTanya.href = `https://wa.me/${6285141179499}?text=${encodeURIComponent("Halo kak, saya mau tanya soal Canva Pro.")}`;
+    btnBeli.href  = `https://wa.me/${6285141179499}?text=${encodeURIComponent(msg)}`;
+  }
+
+  paket.addEventListener("change", update);
+  designer.addEventListener("change", update);
+  update();
+</script>
+</body>
+</html>
