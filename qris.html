@@ -1,241 +1,242 @@
 <!doctype html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>QRIS • Endzyless Store</title>
-  <style>
-    :root{
-      --c1:#397ed9; --c2:#014ce7; --c3:#5a37e7;
-      --bg1:#0b1020; --card: rgba(255,255,255,.06);
-      --line: rgba(255,255,255,.12); --text:#e9eeff; --muted:rgba(233,238,255,.65);
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 500px at 50% -10%, rgba(57,126,217,.35), transparent 60%),
-        radial-gradient(900px 500px at 50% 20%, rgba(1,76,231,.22), transparent 60%),
-        radial-gradient(900px 700px at 50% 110%, rgba(90,55,231,.25), transparent 55%),
-        linear-gradient(180deg, #070a12 0%, #070a12 100%);
-      min-height:100vh;
-    }
-    .topbar{
-      padding:14px 16px;
-      display:flex; align-items:center; justify-content:space-between;
-      position:sticky; top:0;
-      background:linear-gradient(180deg, rgba(7,10,18,.92), rgba(7,10,18,.65));
-      backdrop-filter: blur(10px);
-      border-bottom:1px solid var(--line);
-    }
-    .back{
-      display:inline-flex; align-items:center; gap:8px;
-      color:var(--text); text-decoration:none; font-weight:700;
-      opacity:.9;
-    }
-    .pill{
-      padding:8px 12px; border-radius:999px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.04);
-      color:var(--muted); font-weight:700; font-size:13px;
-    }
-    .wrap{max-width:520px; margin:0 auto; padding:18px 16px 28px;}
-    .card{
-      border:1px solid var(--line);
-      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
-      border-radius:18px;
-      padding:16px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.45);
-    }
-    h1{margin:0 0 6px; font-size:20px}
-    .muted{color:var(--muted); font-size:14px; line-height:1.4}
-    .row{display:flex; justify-content:space-between; gap:10px; margin-top:12px}
-    .k{color:var(--muted); font-weight:700}
-    .v{font-weight:900}
-    .qrisBox{
-      margin-top:14px;
-      display:flex; flex-direction:column; align-items:center; gap:10px;
-      padding:14px;
-      border-radius:16px;
-      border:1px dashed rgba(255,255,255,.20);
-      background:rgba(0,0,0,.18);
-    }
-    .qrisBox img{
-      width:260px; max-width:86%;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background:#fff;
-    }
-    .btn{
-      width:100%;
-      margin-top:12px;
-      padding:12px 14px;
-      border-radius:14px;
-      border:none;
-      font-weight:900;
-      cursor:pointer;
-    }
-    .btnPrimary{
-      background:linear-gradient(180deg, var(--c1), var(--c2) 55%, var(--c3));
-      color:white;
-    }
-    .btnGhost{
-      background:rgba(255,255,255,.06);
-      border:1px solid var(--line);
-      color:var(--text);
-    }
-    input{
-      width:100%;
-      padding:12px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.15);
-      background:rgba(0,0,0,.22);
-      color:var(--text);
-      outline:none;
-      margin-top:10px;
-      font-weight:700;
-    }
-    hr{border:none;border-top:1px solid var(--line); margin:16px 0}
-    .productBox{
-      display:none;
-      margin-top:14px;
-      padding:14px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(0,0,0,.22);
-    }
-    pre{
-      margin:10px 0 0;
-      white-space:pre-wrap;
-      word-wrap:break-word;
-      line-height:1.4;
-      font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      font-size:13px;
-    }
-    .warn{
-      margin-top:12px;
-      font-weight:900;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.12);
-      padding:10px 12px;
-      border-radius:14px;
-    }
-    .foot{margin-top:14px; text-align:center; color:rgba(233,238,255,.45); font-size:12px}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>QRIS • Endzyless Store</title>
+
+<style>
+:root{
+  --c1:#397ed9; 
+  --c2:#014ce7; 
+  --c3:#5a37e7;
+  --line:rgba(255,255,255,.12);
+  --text:#e9eeff;
+  --muted:rgba(233,238,255,.65);
+}
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  color:var(--text);
+  background:linear-gradient(180deg,#397ed9 0%,#014ce7 50%,#5a37e7 100%);
+  min-height:100vh;
+}
+
+.topbar{
+  padding:14px 16px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+
+.wrap{
+  max-width:520px;
+  margin:0 auto;
+  padding:20px 16px 30px;
+}
+
+.card{
+  background:rgba(0,0,0,.25);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:16px;
+}
+
+h1{margin:0 0 8px;font-size:20px}
+.muted{color:var(--muted);font-size:14px}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  margin-top:12px;
+}
+
+.qrisBox{
+  margin-top:16px;
+  padding:14px;
+  text-align:center;
+  border:1px dashed rgba(255,255,255,.25);
+  border-radius:16px;
+  background:rgba(0,0,0,.25);
+}
+
+.qrisBox img{
+  width:260px;
+  max-width:85%;
+  border-radius:12px;
+  background:white;
+}
+
+.btn{
+  display:block;
+  width:100%;
+  margin-top:14px;
+  padding:12px;
+  border-radius:14px;
+  border:none;
+  font-weight:900;
+  text-align:center;
+  cursor:pointer;
+}
+
+.btnPrimary{
+  background:linear-gradient(180deg,#397ed9,#014ce7 60%,#5a37e7);
+  color:white;
+}
+
+.btnGhost{
+  background:rgba(255,255,255,.08);
+  border:1px solid var(--line);
+  color:white;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.2);
+  background:rgba(0,0,0,.25);
+  color:white;
+  margin-top:10px;
+}
+
+.productBox{
+  display:none;
+  margin-top:16px;
+  padding:14px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.15);
+  background:rgba(0,0,0,.25);
+}
+
+.warn{
+  margin-top:12px;
+  padding:10px;
+  border-radius:12px;
+  font-weight:900;
+  background:rgba(255,255,255,.1);
+}
+
+.foot{
+  margin-top:14px;
+  text-align:center;
+  font-size:12px;
+  opacity:.7;
+}
+</style>
 </head>
+
 <body>
-  <div class="topbar">
-    <a class="back" href="canva.html">← Kembali</a>
-    <span class="pill" id="badge">QRIS</span>
+
+<div class="topbar">
+  <div>← Kembali</div>
+  <div>QRIS</div>
+</div>
+
+<div class="wrap">
+<div class="card">
+
+<h1>Bayar via QRIS</h1>
+<div class="muted">
+Scan QRIS di bawah, lalu kirim bukti pembayaran ke WhatsApp admin.
+Setelah di-ACC, masukkan Kode ACC untuk membuka produk.
+</div>
+
+<div class="row">
+  <div>Produk</div>
+  <div id="pName">-</div>
+</div>
+
+<div class="row">
+  <div>Total</div>
+  <div id="pTotal">Rp0</div>
+</div>
+
+<div class="qrisBox">
+  <img id="qrisImg" src="qris.png" alt="QRIS Tokoku">
+  <div class="muted">Pastikan nominal sesuai total di atas</div>
+</div>
+
+<a id="waBtn" class="btn btnPrimary" target="_blank">
+Kirim Bukti ke WhatsApp
+</a>
+
+<hr style="margin:18px 0;border:none;border-top:1px solid rgba(255,255,255,.2)">
+
+<div>Sudah bayar? Masukkan Kode ACC:</div>
+<input id="accCode" placeholder="Contoh: ES-10001">
+<button id="unlockBtn" class="btn btnGhost">Buka Produk</button>
+
+<div id="productBox" class="productBox">
+  <div style="font-weight:900;">Produk kamu:</div>
+  <pre id="productText"></pre>
+
+  <div class="warn">
+    Screenshot login kirim ke WA 085141179499 untuk mendapatkan garansi.
   </div>
+</div>
 
-  <div class="wrap">
-    <div class="card">
-      <h1>Bayar via QRIS</h1>
-      <div class="muted">
-        Scan QRIS Tokoku, lalu <b>kirim bukti pembayaran</b> ke WhatsApp admin.
-        Setelah admin ACC, kamu dapat <b>Kode ACC</b> untuk membuka produk.
-      </div>
+<div class="foot">© Endzyless Store</div>
 
-      <div class="row">
-        <div>
-          <div class="k">Produk</div>
-          <div class="v" id="pName">-</div>
-        </div>
-      </div>
+</div>
+</div>
 
-      <div class="row">
-        <div>
-          <div class="k">Total</div>
-          <div class="v" id="pTotal">Rp0</div>
-        </div>
-        <div style="text-align:right">
-          <div class="k">Status</div>
-          <div class="v" style="opacity:.9">Menunggu bayar</div>
-        </div>
-      </div>
+<script>
 
-      <div class="qrisBox">
-        <img id="qrisImg" alt="QRIS Tokoku" />
-        <div class="muted" style="text-align:center">
-          Pastikan nominal sesuai total di atas.
-        </div>
-      </div>
+// ===== DATA TOKO =====
+const waNumber = "6285141179499";
+const QRIS_IMG = "qris.png";
 
-      <a id="waBtn" class="btn btnPrimary" style="display:inline-block;text-decoration:none;text-align:center">
-        Kirim bukti pembayaran ke WhatsApp
-      </a>
+// Contoh kode ACC (kamu tambahkan manual setiap ada order)
+const approvedCodes = {
+  "ES-10001": {
+    text: "Canva Member 1 Bulan\n\nLink Invite:\nhttps://contoh-link.com\n\nJangan dibagikan ke orang lain."
+  }
+};
 
-      <hr/>
+// Ambil data dari URL
+const url = new URL(location.href);
+const product = url.searchParams.get("p") || "Produk";
+const amount = url.searchParams.get("a") || "0";
 
-      <div class="k">Sudah bayar? Masukkan Kode ACC dari admin:</div>
-      <input id="accCode" placeholder="Contoh: ES-83921" />
-      <button id="unlockBtn" class="btn btnGhost">Buka Produk</button>
+const rupiah = n => "Rp" + Number(n).toLocaleString("id-ID");
 
-      <div id="productBox" class="productBox">
-        <div class="v">Produk kamu:</div>
-        <pre id="productText"></pre>
-        <div class="warn" id="garansiText">
-          Screenshot login kirim ke WA 08xxxxxxxxxx untuk mendapatkan garansi.
-        </div>
-      </div>
+document.getElementById("pName").textContent = product;
+document.getElementById("pTotal").textContent = rupiah(amount);
+document.getElementById("qrisImg").src = QRIS_IMG;
 
-      <div class="foot">© <span id="y"></span> Endzyless Store</div>
-    </div>
-  </div>
+// WA link
+const msg = encodeURIComponent(
+`Halo admin Endzyless Store, saya sudah bayar.
 
-  <script>
-    // ====== EDIT DI SINI ======
-    const waNumber = "628xxxxxxxxxx";        // ganti nomor WA kamu (format 62...)
-    const waDisplay = "08xxxxxxxxxx";        // buat teks garansi (format 08...)
-    const QRIS_IMG = "qris.png";             // nama file QRIS kamu di repo
+Produk: ${product}
+Total: ${rupiah(amount)}
 
-    // KODE ACC YANG KAMU KASIH KE PEMBELI (isi manual)
-    // Format: "KODE": { text: "isi produk (teks)..." }
-    const approvedCodes = {
-      "ES-83921": { text: "Contoh produk: Link / instruksi / catatan akan muncul di sini." }
-    };
-    // ==========================
+Ini bukti pembayaran:`
+);
 
-    // ambil data order dari URL
-    const url = new URL(location.href);
-    const product = url.searchParams.get("p") || "Produk";
-    const amount  = url.searchParams.get("a") || "0";
+document.getElementById("waBtn").href =
+`https://wa.me/${waNumber}?text=${msg}`;
 
-    // format rupiah
-    const rupiah = n => "Rp" + (Number(n)||0).toLocaleString("id-ID");
+// Unlock Produk
+document.getElementById("unlockBtn").onclick = function(){
+  const code = document.getElementById("accCode").value.trim().toUpperCase();
+  if(!approvedCodes[code]){
+    alert("Kode salah atau belum di-ACC admin.");
+    return;
+  }
 
-    // render info
-    document.getElementById("pName").textContent = product;
-    document.getElementById("pTotal").textContent = rupiah(amount);
+  document.getElementById("productText").textContent =
+    approvedCodes[code].text;
 
-    // qris image
-    document.getElementById("qrisImg").src = QRIS_IMG;
+  document.getElementById("productBox").style.display = "block";
+};
 
-    // wa link
-    const msg = encodeURIComponent(
-      `Halo admin Endzyless Store, saya sudah bayar.\n\nProduk: ${product}\nTotal: ${rupiah(amount)}\n\nIni bukti pembayaran:`
-    );
-    document.getElementById("waBtn").href = `https://wa.me/${waNumber}?text=${msg}`;
+</script>
 
-    // garansi text
-    document.getElementById("garansiText").textContent =
-      `Screenshot login kirim ke WA ${waDisplay} untuk mendapatkan garansi.`;
-
-    // unlock
-    document.getElementById("unlockBtn").onclick = () => {
-      const code = (document.getElementById("accCode").value || "").trim().toUpperCase();
-      if (!approvedCodes[code]) {
-        alert("Kode ACC salah / belum di-ACC admin. Cek WhatsApp ya.");
-        return;
-      }
-      document.getElementById("productText").textContent = approvedCodes[code].text;
-      document.getElementById("productBox").style.display = "block";
-      document.getElementById("badge").textContent = "SUKSES";
-    };
-
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
