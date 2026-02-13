@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Aplikasi Premium - Endzyless Store</title>
+
+<style>
+:root{
+--bg:#0b0f1f;
+--card:#12182b;
+--line:#1f2740;
+--text:#ffffff;
+--muted:#9aa4c7;
+--grad:linear-gradient(135deg,#3b82f6,#6366f1);
+}
+
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:system-ui;
+background:var(--bg);
+color:var(--text);
+}
+
+a{text-decoration:none;color:inherit}
+
+.header{
+padding:16px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+border-bottom:1px solid var(--line);
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.logo img{
+width:40px;
+height:40px;
+border-radius:12px;
+}
+
+.wrap{
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+.title{
+font-size:22px;
+font-weight:800;
+margin-bottom:20px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+gap:14px;
+}
+
+.card{
+background:var(--card);
+border:1px solid var(--line);
+padding:18px;
+border-radius:16px;
+text-align:center;
+transition:0.2s;
+}
+
+.card:hover{
+transform:translateY(-3px);
+border-color:#4f46e5;
+}
+
+.icon{
+width:60px;
+height:60px;
+margin:auto;
+border-radius:16px;
+background:var(--grad);
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:bold;
+font-size:22px;
+}
+
+.name{
+margin-top:12px;
+font-weight:700;
+}
+
+.desc{
+font-size:12px;
+color:var(--muted);
+margin-top:4px;
+}
+
+.back{
+display:inline-block;
+margin-top:30px;
+padding:10px 14px;
+border-radius:12px;
+border:1px solid var(--line);
+color:var(--muted);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<div class="logo">
+<img src="Logo.png" alt="logo">
+<div>
+<strong>Endzyless Store</strong><br>
+<small style="color:var(--muted)">Aplikasi Premium</small>
+</div>
+</div>
+
+<a href="index.html">← Kembali</a>
+</div>
+
+<div class="wrap">
+
+<div class="title">Pilih Aplikasi</div>
+
+<div class="grid">
+
+<a href="canva.html" class="card">
+<div class="icon">C</div>
+<div class="name">Canva</div>
+<div class="desc">Desain premium</div>
+</a>
+
+<a href="#" class="card">
+<div class="icon">CP</div>
+<div class="name">Capcut</div>
+<div class="desc">Video editor pro</div>
+</a>
+
+<a href="#" class="card">
+<div class="icon">NF</div>
+<div class="name">Netflix</div>
+<div class="desc">Streaming premium</div>
+</a>
+
+<a href="#" class="card">
+<div class="icon">YT</div>
+<div class="name">YouTube</div>
+<div class="desc">Tanpa iklan</div>
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>
