@@ -443,14 +443,24 @@
     btnClose.addEventListener("click", closeSheet);
     addon.addEventListener("change", updateTotal);
 
-    // UI dulu: tombol lanjutkan masih dummy
-    btnNext.addEventListener("click", () => {
-      if (!current) return;
-      // nanti bisa diarahkan ke halaman QRIS / midtrans
-      alert("Next step (UI dulu): lanjut ke pembayaran/QRIS.\n\nProduk: " + current.name +
-            "\nDesigner: " + (addon.checked ? "Ya (+Rp1.000)" : "Tidak") +
-            "\nTotal: " + dpTotal.textContent);
-    });
+    // Tombol Lanjutkan: pindah ke qris.html sambil kirim nama produk + total
+btnNext.addEventListener("click", () => {
+  if (!current) return;
+
+  let total = current.price;
+  let addonText = "";
+
+  if (addon.checked) {
+    total += DESIGNER_ADDON;
+    addonText = " + Designer";
+  }
+
+  const namaProduk = current.name + addonText;
+
+  // pindah halaman ke QRIS
+  window.location.href =
+    `qris.html?p=${encodeURIComponent(namaProduk)}&a=${encodeURIComponent(total)}`;
+});
 
     clearBtn.addEventListener("click", () => { qEl.value=""; render(); });
     qEl.addEventListener("input", render);
