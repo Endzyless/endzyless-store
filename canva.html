@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Canva - Endzyless Store</title>
+
+<style>
+:root{
+--bg:#0b0f1f;
+--card:#12182b;
+--line:#1f2740;
+--text:#ffffff;
+--muted:#9aa4c7;
+--grad:linear-gradient(135deg,#3b82f6,#6366f1);
+}
+
+*{box-sizing:border-box}
+
+body{
+margin:0;
+font-family:system-ui;
+background:var(--bg);
+color:var(--text);
+}
+
+a{text-decoration:none;color:inherit}
+
+.header{
+padding:16px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+border-bottom:1px solid var(--line);
+}
+
+.wrap{
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+.title{
+font-size:22px;
+font-weight:800;
+margin-bottom:20px;
+}
+
+.list{
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+.card{
+background:var(--card);
+border:1px solid var(--line);
+padding:16px;
+border-radius:16px;
+transition:0.2s;
+}
+
+.card:hover{
+border-color:#4f46e5;
+transform:translateY(-2px);
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.name{
+font-weight:700;
+}
+
+.stock{
+font-size:12px;
+color:var(--muted);
+margin-top:4px;
+}
+
+.price{
+font-weight:800;
+font-size:16px;
+background:var(--grad);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.back{
+display:inline-block;
+margin-top:25px;
+padding:10px 14px;
+border-radius:12px;
+border:1px solid var(--line);
+color:var(--muted);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<strong>Canva</strong>
+<a href="app-prem.html">← Kembali</a>
+</div>
+
+<div class="wrap">
+
+<div class="title">Produk Canva</div>
+
+<div class="list">
+
+<a href="detail.html?produk=Canva Member 1 Bulan&harga=5000" class="card">
+<div class="row">
+<div>
+<div class="name">Canva Member 1 Bulan</div>
+<div class="stock">Stok tersedia</div>
+</div>
+<div class="price">Rp5.000</div>
+</div>
+</a>
+
+<a href="detail.html?produk=Canva Member 1 Tahun&harga=28000" class="card">
+<div class="row">
+<div>
+<div class="name">Canva Member 1 Tahun</div>
+<div class="stock">Stok tersedia</div>
+</div>
+<div class="price">Rp28.000</div>
+</div>
+</a>
+
+<a href="detail.html?produk=Canva Designer 1 Bulan&harga=6000" class="card">
+<div class="row">
+<div>
+<div class="name">Canva Designer 1 Bulan</div>
+<div class="stock">Stok terbatas</div>
+</div>
+<div class="price">Rp6.000</div>
+</div>
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>
