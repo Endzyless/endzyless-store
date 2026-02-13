@@ -4,145 +4,570 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Endzyless Store</title>
+  <meta name="theme-color" content="#1b69ff"/>
   <style>
     :root{
-      --bg:#0b0c10;
-      --card:#12141b;
-      --text:#e8eaf0;
-      --muted:#a9afc3;
-      --line:#212534;
-
-      /* BRAND COLORS (sesuai warna utama kamu) */
-      --brand1:#2f7df6;  /* biru */
-      --brand2:#6b4cf6;  /* ungu */
-      --brandGrad: linear-gradient(135deg, var(--brand1), var(--brand2));
-      --brandGlow: 0 0 0 1px rgba(47,125,246,.25), 0 16px 40px rgba(107,76,246,.18);
+      --bg1:#1b69ff;
+      --bg2:#5a2fff;
+      --panel: rgba(10,12,18,.55);
+      --card: rgba(255,255,255,.06);
+      --line: rgba(255,255,255,.10);
+      --text:#f2f5ff;
+      --muted: rgba(242,245,255,.72);
+      --accent:#2ee6ff;
+      --accent2:#7b5cff;
+      --shadow: 0 18px 60px rgba(0,0,0,.35);
+      --radius: 22px;
     }
 
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
-      background: radial-gradient(1200px 700px at 20% -10%, rgba(47,125,246,.22), transparent 55%),
-                  radial-gradient(900px 600px at 90% 0%, rgba(107,76,246,.18), transparent 55%),
-                  var(--bg);
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial;
       color:var(--text);
+      background: linear-gradient(180deg,var(--bg1),var(--bg2));
+      min-height:100vh;
     }
-    a{text-decoration:none;color:inherit}
-    .top{
-      position:sticky; top:0;
-      background:rgba(11,12,16,.75);
-      backdrop-filter:blur(10px);
-      border-bottom:1px solid var(--line);
-      padding:14px 16px;
-      display:flex; align-items:center; justify-content:space-between;
-      z-index:20;
-    }
+    a{color:inherit;text-decoration:none}
+    button{font-family:inherit}
 
-    .brand{display:flex;gap:12px;align-items:center;min-width:0}
-    .logoWrap{
-      width:46px;height:46px;border-radius:16px;
-      background: rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
-      display:grid; place-items:center;
-      overflow:hidden;
-      box-shadow: var(--brandGlow);
+    .top{
+      position:sticky; top:0; z-index:10;
+      padding:14px 14px 10px;
+      background: linear-gradient(180deg, rgba(10,12,18,.55), rgba(10,12,18,.10));
+      backdrop-filter: blur(10px);
+    }
+    .nav{
+      max-width:980px; margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:10px 12px;
+      border:1px solid var(--line);
+      background: rgba(10,12,18,.40);
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+    }
+    .brand{display:flex; align-items:center; gap:12px; min-width:0}
+    .brand img{
+      width:44px; height:44px; border-radius:14px;
+      object-fit:cover; border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
       flex:0 0 auto;
     }
-    .logoImg{
-      width:100%; height:100%;
-      object-fit:cover;
-      display:block;
+    .brand .t{min-width:0}
+    .brand .t b{display:block; font-size:16px; line-height:1.1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+    .brand .t small{display:block; color:var(--muted); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+    .pill{
+      padding:10px 14px; border-radius:999px;
+      border:1px solid rgba(123,92,255,.45);
+      background: rgba(123,92,255,.14);
+      color:rgba(242,245,255,.92);
+      font-weight:800; font-size:13px;
+      flex:0 0 auto;
     }
 
-    h1{margin:0;font-size:18px;line-height:1.1}
-    .brand p{margin:2px 0 0;color:var(--muted);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .wrap{max-width:980px; margin:0 auto; padding:14px 14px 60px}
 
-    .chip{
+    .hero{
+      padding:16px 4px 12px;
+    }
+    .hero h1{margin:0 0 6px; font-size:30px; letter-spacing:.2px}
+    .hero p{margin:0; color:var(--muted); line-height:1.5}
+
+    .panel{
+      margin-top:12px;
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .panelHead{
+      padding:14px 14px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      background: rgba(255,255,255,.04);
+      border-bottom:1px solid rgba(255,255,255,.07);
+    }
+    .panelHead .left{
+      display:flex; align-items:center; gap:10px;
+      min-width:0;
+    }
+    .back{
+      display:none;
       padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      font-weight:900; font-size:13px;
+      cursor:pointer;
+    }
+    .panelTitle{
+      font-weight:900;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+
+    .grid{
+      padding:14px;
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:12px;
+    }
+    .tile{
+      padding:16px 14px;
+      border-radius: 18px;
       border:1px solid rgba(255,255,255,.10);
-      border-radius:999px;
-      font-size:12px;
-      background:rgba(255,255,255,.03);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 12px 30px rgba(0,0,0,.22);
+      cursor:pointer;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      user-select:none;
+      min-height:86px;
+      display:flex; flex-direction:column; justify-content:center;
     }
-    .chip:hover{border-color:rgba(47,125,246,.45)}
+    .tile:hover{transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.16)}
+    .tile b{font-size:15px}
+    .tile small{color:var(--muted); margin-top:4px; line-height:1.35}
 
-    .wrap{max-width:920px;margin:0 auto;padding:18px 16px 46px}
+    .list{padding:10px 14px 14px}
+    .search{
+      display:flex; gap:10px; align-items:center;
+      padding:12px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      margin:10px 0 12px;
+    }
+    .search input{
+      width:100%;
+      border:0; outline:0;
+      background:transparent; color:var(--text);
+      font-size:14px;
+    }
+    .items{display:flex; flex-direction:column; gap:10px}
+    .item{
+      padding:14px 14px;
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+      cursor:pointer;
+    }
+    .item b{display:block; font-size:15px}
+    .item small{display:block; color:var(--muted); margin-top:4px}
 
-    .hero{padding:14px 0 10px}
-    .hero h2{margin:0 0 8px;font-size:22px}
-    .hero p{margin:0;color:var(--muted);line-height:1.45}
-
+    .detail{padding:14px}
     .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:18px;
+      border-radius: 22px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
       padding:16px;
-      box-shadow: 0 18px 50px rgba(0,0,0,.35);
     }
-    .row{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
-    .title{margin:0 0 6px;font-size:16px;font-weight:900}
-    .desc{margin:0;color:var(--muted);font-size:13px;line-height:1.4}
-
+    .row{display:flex; justify-content:space-between; gap:10px; align-items:flex-start}
     .badge{
-      font-size:12px;font-weight:900;
-      padding:8px 10px;border-radius:999px;
-      background:rgba(47,125,246,.10);
-      border:1px solid rgba(47,125,246,.35);
-      color:#cfe1ff;
+      font-size:12px; font-weight:900;
+      padding:8px 10px; border-radius:999px;
+      background: rgba(46,230,255,.12);
+      border:1px solid rgba(46,230,255,.35);
+      color: rgba(232,253,255,.95);
       white-space:nowrap;
     }
+    .title{margin:0 0 6px; font-size:16px; font-weight:1000}
+    .desc{margin:0; color:var(--muted); font-size:13px; line-height:1.45}
 
-    .features{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 14px}
-    .feat{
-      font-size:12px;color:var(--muted);
-      padding:8px 10px;border:1px solid rgba(255,255,255,.08);
-      border-radius:999px;background:rgba(255,255,255,.02)
+    .chips{display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 14px}
+    .chip{
+      font-size:12px; color: rgba(242,245,255,.80);
+      padding:8px 10px; border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
     }
 
-    .label{display:block;font-size:12px;color:var(--muted);margin:10px 0 6px}
-    .select{
+    label{display:block; font-size:12px; color:var(--muted); margin:10px 0 6px}
+    select{
       width:100%;
       padding:12px 12px;
-      border-radius:14px;
+      border-radius: 16px;
       border:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.02);
-      color:var(--text);
-      outline:none
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      outline:none;
     }
-    .select:focus{border-color:rgba(47,125,246,.55); box-shadow:0 0 0 3px rgba(47,125,246,.12)}
-
-    .check{display:flex;gap:10px;align-items:center;color:var(--text);font-size:13px}
+    .check{display:flex; gap:10px; align-items:center; margin-top:8px}
     .check input{transform:scale(1.2)}
-
-    .total{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
-    .price{font-weight:900}
-
-    .actions{display:flex;gap:10px;margin-top:12px}
+    .total{
+      margin-top:12px;
+      display:flex; align-items:center; justify-content:space-between;
+      font-weight:1000;
+    }
+    .price{font-size:18px}
+    .actions{display:flex; gap:10px; margin-top:12px}
     .btn{
       flex:1;
-      display:flex;justify-content:center;align-items:center;
-      padding:12px 12px;border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      padding:12px 12px;
+      border-radius: 16px;
       border:1px solid rgba(255,255,255,.12);
-      font-weight:900;
-      background:rgba(255,255,255,.02);
+      background: rgba(255,255,255,.06);
+      font-weight:1000;
     }
-    .btn:hover{border-color:rgba(255,255,255,.22)}
     .primary{
       border:0;
-      background: var(--brandGrad);
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
       color:#071018;
-      box-shadow: var(--brandGlow);
     }
-    .primary:hover{filter:brightness(1.03)}
+    .note{margin-top:12px; color:var(--muted); font-size:12px; line-height:1.45}
 
-    .note{margin-top:12px;color:var(--muted);font-size:12px}
-    .footer{margin-top:20px;border-top:1px solid rgba(255,255,255,.08);padding-top:14px;color:var(--muted);font-size:12px;text-align:center}
+    .footer{
+      padding:18px 10px 0;
+      text-align:center;
+      color: rgba(242,245,255,.72);
+      font-size:12px;
+    }
+
+    /* Mobile tweak */
+    @media (min-width:720px){
+      .grid{grid-template-columns: repeat(3, minmax(0,1fr))}
+    }
+
+    /* Views */
+    .view{display:none}
+    .view.active{display:block}
   </style>
 </head>
+
 <body>
   <header class="top">
-    <div class="brand">
+    <div class="nav">
+      <div class="brand">
+        <!-- Pastikan file logo.png ada di repo (root) -->
+        <img src="logo.png" alt="Endzyless Store Logo" onerror="this.style.display='none'">
+        <div class="t">
+          <b>Endzyless Store</b>
+          <small>Semua kebutuhan digitalmu ada disini!</small>
+        </div>
+      </div>
+      <a class="pill" href="#home">Home</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1>Belanja produk digital tanpa ribet</h1>
+      <p>Pilih kategori → pilih produk → klik beli. (Nanti tombolnya tinggal disambung QRIS otomatis.)</p>
+    </section>
+
+    <section class="panel">
+      <div class="panelHead">
+        <div class="left">
+          <button id="btnBack" class="back" type="button">← Kembali</button>
+          <div id="panelTitle" class="panelTitle">Menu</div>
+        </div>
+        <div style="color:var(--muted);font-size:12px" id="crumb">Home</div>
+      </div>
+
+      <!-- HOME -->
+      <div id="viewHome" class="view active">
+        <div class="grid">
+          <div class="tile" data-go="apps">
+            <b>🧩 Aplikasi Premium</b>
+            <small>Pilih Canva, CapCut, Netflix, dll</small>
+          </div>
+          <div class="tile" data-go="smm">
+            <b>📣 Sosial Media Marketing</b>
+            <small>Jasa & paket promosi (bisa diisi belakangan)</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- APPS LIST -->
+      <div id="viewApps" class="view">
+        <div class="list">
+          <div class="search">
+            🔎 <input id="qApps" placeholder="Cari aplikasi… (contoh: canva, netflix)" autocomplete="off"/>
+          </div>
+          <div id="appsItems" class="items"></div>
+        </div>
+      </div>
+
+      <!-- SMM LIST -->
+      <div id="viewSmm" class="view">
+        <div class="list">
+          <div class="search">
+            🧾 <input id="qSmm" placeholder="Cari layanan… (contoh: ig, tiktok)" autocomplete="off"/>
+          </div>
+          <div id="smmItems" class="items"></div>
+        </div>
+      </div>
+
+      <!-- DETAIL PRODUCT -->
+      <div id="viewDetail" class="view">
+        <div class="detail">
+          <div class="card">
+            <div class="row">
+              <div>
+                <p id="dTitle" class="title">Produk</p>
+                <p id="dDesc" class="desc">Deskripsi produk.</p>
+              </div>
+              <div id="dBadge" class="badge">Full Garansi</div>
+            </div>
+
+            <div id="dChips" class="chips"></div>
+
+            <label>Pilih paket</label>
+            <select id="paket"></select>
+
+            <label>Add-on</label>
+            <label class="check">
+              <input id="addon" type="checkbox"/>
+              <span id="addonText">Add-on +Rp0</span>
+            </label>
+
+            <div class="total">
+              <span>Total</span>
+              <span id="total" class="price">Rp0</span>
+            </div>
+
+            <div class="actions">
+              <a id="tanya" class="btn" target="_blank" rel="noreferrer">Tanya</a>
+              <a id="beli" class="btn primary" target="_blank" rel="noreferrer">Beli</a>
+            </div>
+
+            <div class="note">
+              Catatan: Produk digital. Detail dikirim setelah pembayaran terkonfirmasi.
+            </div>
+          </div>
+
+          <div class="footer">© <span id="year"></span> Endzyless Store</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<script>
+  // ====== CONFIG ======
+  const WA = "6285141179499"; // WA kamu (format 62, tanpa 0)
+
+  // Data contoh — tinggal kamu edit/ambahin
+  const APPS = [
+    {
+      key: "canva",
+      name: "🎨 Canva Pro",
+      desc: "Akses Canva Pro untuk desain cepat, rapi, dan profesional — cocok untuk semua kebutuhan visual.",
+      badge: "Full Garansi",
+      chips: ["Akses fitur pro tanpa batas", "Ribuan template siap pakai", "Elemen, font, aset eksklusif", "Konten • Presentasi • Branding"],
+      addonLabel: "Designer",
+      addonPrice: 1000,
+      packages: [
+        ["1 Bulan", 5000],
+        ["2 Bulan", 7000],
+        ["3 Bulan", 9000],
+        ["4 Bulan", 11000],
+        ["5 Bulan", 13000],
+        ["6 Bulan", 15000],
+        ["1 Tahun", 28000]
+      ]
+    },
+    { key:"capcut", name:"🎬 CapCut Pro", desc:"Edit video lebih cepat dengan fitur premium.", badge:"Full Garansi",
+      chips:["Template premium","Export lebih leluasa","Cocok konten harian"], addonLabel:"Fast Support", addonPrice:0,
+      packages:[["1 Bulan",9000],["3 Bulan",23000]]
+    },
+    { key:"netflix", name:"🍿 Netflix", desc:"Nonton film & series (opsi paket bisa kamu atur).", badge:"Garansi",
+      chips:["Bisa request profil","Proses cepat"], addonLabel:"Extra Screen", addonPrice:0,
+      packages:[["1 Bulan",15000]]
+    }
+  ];
+
+  const SMM = [
+    { key:"igboost", name:"📈 IG Boost", desc:"Paket peningkatan performa IG (isi nanti)."},
+    { key:"tiktok", name:"🎵 TikTok Marketing", desc:"Paket promo TikTok (isi nanti)."}
+  ];
+
+  // ====== Helpers ======
+  const rupiah = (n) => "Rp" + new Intl.NumberFormat("id-ID").format(n);
+  const $ = (id) => document.getElementById(id);
+
+  $("year").textContent = new Date().getFullYear();
+
+  // ====== Views ======
+  const views = {
+    home: $("viewHome"),
+    apps: $("viewApps"),
+    smm: $("viewSmm"),
+    detail: $("viewDetail")
+  };
+
+  function setView(name, title, crumb, showBack){
+    Object.values(views).forEach(v => v.classList.remove("active"));
+    views[name].classList.add("active");
+    $("panelTitle").textContent = title || "Menu";
+    $("crumb").textContent = crumb || "Home";
+    $("btnBack").style.display = showBack ? "inline-flex" : "none";
+  }
+
+  // Simple hash router
+  function route(){
+    const h = (location.hash || "#home").replace("#","");
+    if(h === "home"){ setView("home","Menu","Home", false); return; }
+    if(h === "apps"){ setView("apps","Aplikasi Premium","Home / Aplikasi Premium", true); return; }
+    if(h === "smm"){ setView("smm","Sosial Media Marketing","Home / Sosial Media Marketing", true); return; }
+    // detail: #p=canva
+    if(h.startsWith("p=")){
+      const key = h.split("p=")[1];
+      openDetailByKey(key);
+      return;
+    }
+    // fallback
+    location.hash = "#home";
+  }
+
+  $("btnBack").addEventListener("click", () => {
+    // Back logic based on current view
+    if(views.detail.classList.contains("active")){
+      // if product is app -> go apps, else go smm
+      const from = $("viewDetail").dataset.from || "home";
+      location.hash = from === "apps" ? "#apps" : (from === "smm" ? "#smm" : "#home");
+    } else {
+      location.hash = "#home";
+    }
+  });
+
+  // Home tiles
+  document.querySelectorAll(".tile").forEach(t => {
+    t.addEventListener("click", () => {
+      const go = t.dataset.go;
+      location.hash = "#" + go;
+    });
+  });
+
+  // ====== Render lists ======
+  function renderApps(filter=""){
+    const wrap = $("appsItems");
+    wrap.innerHTML = "";
+    const q = filter.trim().toLowerCase();
+    APPS
+      .filter(x => (x.name + " " + x.desc).toLowerCase().includes(q))
+      .forEach(x => {
+        const el = document.createElement("div");
+        el.className = "item";
+        el.innerHTML = `<b>${x.name}</b><small>${x.desc}</small>`;
+        el.addEventListener("click", () => {
+          location.hash = "#p=" + encodeURIComponent(x.key);
+          $("viewDetail").dataset.from = "apps";
+        });
+        wrap.appendChild(el);
+      });
+
+    if(!wrap.children.length){
+      wrap.innerHTML = `<div class="item" style="opacity:.8;cursor:default">
+        <b>Tidak ditemukan</b><small>Coba kata lain.</small></div>`;
+    }
+  }
+
+  function renderSmm(filter=""){
+    const wrap = $("smmItems");
+    wrap.innerHTML = "";
+    const q = filter.trim().toLowerCase();
+    SMM
+      .filter(x => (x.name + " " + x.desc).toLowerCase().includes(q))
+      .forEach(x => {
+        const el = document.createElement("div");
+        el.className = "item";
+        el.innerHTML = `<b>${x.name}</b><small>${x.desc}</small>`;
+        el.addEventListener("click", () => {
+          // kalau SMM nanti mau ada detail sendiri, bisa buat data lengkap seperti APPS
+          // untuk sekarang: arahkan WA tanya dulu
+          const msg = `Halo Endzyless Store, saya mau tanya ${x.name}.`;
+          window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,"_blank");
+        });
+        wrap.appendChild(el);
+      });
+
+    if(!wrap.children.length){
+      wrap.innerHTML = `<div class="item" style="opacity:.8;cursor:default">
+        <b>Belum ada</b><small>Nanti kita isi paketnya ya.</small></div>`;
+    }
+  }
+
+  $("qApps").addEventListener("input", (e) => renderApps(e.target.value));
+  $("qSmm").addEventListener("input", (e) => renderSmm(e.target.value));
+
+  // ====== Detail product ======
+  let current = null;
+
+  function openDetailByKey(keyRaw){
+    const key = decodeURIComponent(keyRaw || "");
+    const p = APPS.find(x => x.key === key);
+    if(!p){
+      location.hash = "#apps";
+      return;
+    }
+    current = p;
+
+    // switch view
+    setView("detail", p.name, `Home / Aplikasi Premium / ${stripEmoji(p.name)}`, true);
+
+    // fill UI
+    $("dTitle").textContent = p.name;
+    $("dDesc").textContent = p.desc;
+    $("dBadge").textContent = p.badge || "Ready";
+
+    const chipsWrap = $("dChips");
+    chipsWrap.innerHTML = "";
+    (p.chips || []).forEach(c => {
+      const x = document.createElement("div");
+      x.className = "chip";
+      x.textContent = c;
+      chipsWrap.appendChild(x);
+    });
+
+    // packages
+    const sel = $("paket");
+    sel.innerHTML = "";
+    p.packages.forEach(([label, price]) => {
+      const opt = document.createElement("option");
+      opt.value = label + "|" + price;
+      opt.textContent = `${label} — ${rupiah(price)}`;
+      sel.appendChild(opt);
+    });
+
+    // addon
+    const addonPrice = Number(p.addonPrice || 0);
+    $("addon").checked = false;
+    $("addonText").textContent = `${p.addonLabel || "Add-on"} +${rupiah(addonPrice)}`;
+
+    function update(){
+      const [pkgName, pkgPriceStr] = sel.value.split("|");
+      let total = parseInt(pkgPriceStr, 10);
+      if($("addon").checked) total += addonPrice;
+
+      $("total").textContent = rupiah(total);
+
+      const addonTxt = $("addon").checked && addonPrice>0 ? ` + ${p.addonLabel}` : "";
+      const msgBuy = `Halo Endzyless Store, saya mau order ${stripEmoji(p.name)} (${pkgName}${addonTxt}). Total ${rupiah(total)}.`;
+      const msgAsk = `Halo kak, saya mau tanya soal ${stripEmoji(p.name)}.`;
+
+      $("tanya").href = `https://wa.me/${WA}?text=${encodeURIComponent(msgAsk)}`;
+      $("beli").href  = `https://wa.me/${WA}?text=${encodeURIComponent(msgBuy)}`;
+    }
+
+    sel.onchange = update;
+    $("addon").onchange = update;
+    update();
+  }
+
+  function stripEmoji(s){
+    // remove emoji-ish chars for crumb readability
+    return (s || "").replace(/[^\p{L}\p{N}\p{P}\p{Z}]/gu,"").trim() || s;
+  }
+
+  // initial render
+  renderApps();
+  renderSmm();
+
+  window.addEventListener("hashchange", route);
+  route();
+</script>
+</body>
+</html>    <div class="brand">
       <div class="logoWrap" aria-label="Logo Endzyless Store">
         <!-- Upload file logo kamu ke repo: logo.png -->
         <img class="logoImg" src="./logo.png" alt="Endzyless Store">
