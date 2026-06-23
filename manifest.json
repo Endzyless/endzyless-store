@@ -1,0 +1,21 @@
+{
+  "name": "Endzyless Store",
+  "short_name": "Endzyless",
+  "start_url": "/endzyless-store/",
+  "display": "standalone",
+  "background_color": "#111827",
+  "theme_color": "#2563eb",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
